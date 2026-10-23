@@ -1,8 +1,8 @@
-# TDLOG Project - Simulation of the Champions League League Phase Draw
+# TDLOG Project - Simulation of the 2024-25 Champions League League Phase Draw
 
 ## Project Overview
 
-This project simulates the UEFA Champions League single-league phase draw, solving scheduling and nationality constraints using Mixed-Integer Linear Programming (MILP).
+This project simulates the 2024-25 UEFA Champions League single-league phase draw, solving scheduling and nationality constraints using Mixed-Integer Linear Programming (MILP).
 
 The original draw simulation algorithm is based on: [https://github.com/JulienGuyon/UEFA-league-phase-draw](https://github.com/JulienGuyon/UEFA-league-phase-draw).
 
