@@ -6,14 +6,17 @@
     box-sizing: border-box;
   }
   
-  /* Style du corps de la page */
-  body, html {
-    margin: 0;
-    padding: 0;
-    background-color: #080e3a;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,GRAD,ROND@8..144,-10..0,25..150,100..1000,-400..400,0..100&display=swap');
+
+/* Style du corps de la page */
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #080e3a;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
   
   /* Style de l'élément racine Angular */
   app-root {

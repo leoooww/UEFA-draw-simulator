@@ -104,6 +104,18 @@ st.set_page_config(page_title="2024-25 UEFA Draw Simulator", layout="wide")
 
 st.markdown(
     """<style>
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,GRAD,ROND@8..144,-10..0,25..150,100..1000,-400..400,0..100&display=swap');
+
+html, body, [class*="css"], [class*="st-"], .stApp,
+h1, h2, h3, h4, h5, h6, p, span, div, button, input, select, textarea,
+[data-testid^="st"] {
+  font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+code, pre, pre *, code *, kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
 /* Prevent tab panel re-renders from re-triggering CSS animations */
 div[data-baseweb="tab-panel"][aria-hidden="true"],
 div[data-baseweb="tab-panel"][hidden],
@@ -417,6 +429,7 @@ def strength_chart(agg: pd.DataFrame, metric: str, title: str, show_error: bool)
     hi = agg[f"{metric}_mean"].max()
     fig.update_layout(
         title=title,
+        font=dict(family="Google Sans Flex, sans-serif"),
         barmode="group",
         height=420,
         margin=dict(l=10, r=10, t=50, b=10),
