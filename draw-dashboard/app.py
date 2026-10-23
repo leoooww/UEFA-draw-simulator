@@ -127,24 +127,20 @@ p, label,
   font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Explicitly preserve and enforce Streamlit Material Symbol icons */
+/* Explicitly preserve and enforce Streamlit Material Symbol icons without affecting toolbar flex layout */
 [data-testid="stIconMaterial"],
 [data-testid*="Icon"]:not([data-testid="stChatMessageAvatarImage"]),
 [data-testid*="icon"],
-[data-testid="stSidebarCollapseButton"] *,
-[data-testid="stExpandSidebarButton"] *,
-[data-testid="collapsedControl"] *,
-[data-testid="stToolbar"] *,
-[data-testid="stToolbarActions"] *,
-[data-testid="stHeader"] button *,
-[data-testid="stMainMenu"] *,
-[data-baseweb="popover"] [translate="no"],
-[data-baseweb="menu"] [translate="no"],
+span[translate="no"],
 .material-symbols-rounded,
 .material-symbols-outlined,
 .material-icons,
-span[translate="no"],
-span[class*="e1vmumty"] {
+span[class*="e1vmumty"],
+[data-testid="stSidebarCollapseButton"] span,
+[data-testid="stExpandSidebarButton"] span,
+[data-testid="collapsedControl"] span,
+[data-baseweb="popover"] span[translate="no"],
+[data-baseweb="menu"] span[translate="no"] {
   font-family: 'Material Symbols Rounded', 'Material Symbols Outlined', 'Material Icons' !important;
   font-weight: normal !important;
   font-style: normal !important;
@@ -156,7 +152,6 @@ span[class*="e1vmumty"] {
   white-space: nowrap !important;
   direction: ltr !important;
   -webkit-font-smoothing: antialiased !important;
-  display: inline-block !important;
 }
 
 code, pre, pre *, code *, kbd {
