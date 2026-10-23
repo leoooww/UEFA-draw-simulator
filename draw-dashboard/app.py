@@ -542,21 +542,33 @@ with st.sidebar:
             if not available_seeds:
                 available_seeds = [1]
 
+            def _pick_random_seed(seeds):
+                if seeds:
+                    st.session_state["pre_seed_select"] = random.choice(seeds)
+
+            if (
+                "pre_seed_select" not in st.session_state
+                or st.session_state["pre_seed_select"] not in available_seeds
+            ):
+                st.session_state["pre_seed_select"] = available_seeds[0]
+
             col_seed, col_rnd = st.columns([2, 1])
             with col_seed:
                 selected_seed = st.selectbox(
                     "Seed",
                     available_seeds,
-                    index=0,
                     key="pre_seed_select",
                     help="Select a seed from the pre-computed catalog.",
                 )
             with col_rnd:
                 st.write("")
                 st.write("")
-                if st.button("Random", help="Select a random pre-computed seed"):
-                    selected_seed = random.choice(available_seeds)
-                    st.session_state["pre_seed_select"] = selected_seed
+                st.button(
+                    "Random",
+                    on_click=_pick_random_seed,
+                    args=(available_seeds,),
+                    help="Select a random pre-computed seed",
+                )
 
             draw_btn = st.button("Draw", type="primary", width="stretch")
             if draw_btn:

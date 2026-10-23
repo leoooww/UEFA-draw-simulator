@@ -97,5 +97,15 @@ def test_club_logos_rendered():
     draw_btn = next(b for b in at.sidebar.button if b.label == "Draw")
     draw_btn.click().run()
     assert not at.exception, at.exception
-    # Verify table and cards contain image data URLs for clubs
     assert any("data:image/png;base64" in m.value for m in at.markdown)
+
+
+def test_random_seed_button():
+    at = _boot()
+    seed_select = next(s for s in at.sidebar.selectbox if s.key == "pre_seed_select")
+    assert seed_select.value is not None
+
+    rnd_btn = next(b for b in at.sidebar.button if b.label == "Random")
+    rnd_btn.click().run()
+    assert not at.exception, at.exception
+    assert str(at.session_state["pre_seed_select"]) in seed_select.options
