@@ -375,12 +375,19 @@ def render_animated_results_table(
   white-space: nowrap;
 }}
 
+.draw-table-{nonce} th.col-club,
+.draw-table-{nonce} td.col-club {{
+  min-width: 180px;
+  white-space: nowrap !important;
+}}
+
 .draw-table-{nonce} tr:hover td {{
   background-color: rgba(128, 128, 128, 0.08);
 }}
 
 .team-name {{
   font-weight: 600;
+  white-space: nowrap;
 }}
 
 .pot-pill {{
@@ -399,7 +406,8 @@ def render_animated_results_table(
 """
     ]
     for col in cols:
-        html.append(f"      <th>{col}</th>\n")
+        th_cls = ' class="col-club"' if col == "Club" else ""
+        html.append(f"      <th{th_cls}>{col}</th>\n")
     html.append("    </tr>\n  </thead>\n  <tbody>\n")
 
     for r, (_, row) in enumerate(df.iterrows()):
@@ -407,14 +415,21 @@ def render_animated_results_table(
         for c, col in enumerate(cols):
             val = row[col]
             delay = round(r * 0.035 + c * 0.025, 3)
+            cell_classes = []
+            if col == "Club":
+                cell_classes.append("col-club")
+            if animate:
+                cell_classes.append(f"anim-cell-{nonce}")
+            cls_str = f' class="{" ".join(cell_classes)}"' if cell_classes else ""
+
             if col == "Club":
                 logo_src = (logos_b64 or {}).get(str(val))
                 logo_img = (
-                    f'<img src="{logo_src}" width="20" height="20" style="vertical-align:middle;margin-right:8px;object-fit:contain;" alt="">'
+                    f'<img src="{logo_src}" width="20" height="20" style="vertical-align:middle;margin-right:8px;object-fit:contain;flex-shrink:0;" alt="">'
                     if logo_src
                     else ""
                 )
-                content = f'{logo_img}<span class="team-name">{val}</span>'
+                content = f'<span style="display:inline-flex;align-items:center;white-space:nowrap;">{logo_img}<span class="team-name">{val}</span></span>'
             elif col in team_cols:
                 content = f'<span class="team-name">{val}</span>'
             elif col == "Pot":
@@ -424,9 +439,9 @@ def render_animated_results_table(
                 content = f"{val}"
 
             if animate:
-                html.append(f'      <td class="anim-cell-{nonce}" style="animation-delay: {delay}s;">{content}</td>\n')
+                html.append(f'      <td{cls_str} style="animation-delay: {delay}s;">{content}</td>\n')
             else:
-                html.append(f'      <td>{content}</td>\n')
+                html.append(f'      <td{cls_str}>{content}</td>\n')
         html.append("    </tr>\n")
 
     cleanup_img = (
