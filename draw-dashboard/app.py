@@ -129,19 +129,25 @@ p, label,
 
 /* Explicitly preserve and enforce Streamlit Material Symbol icons */
 [data-testid="stIconMaterial"],
-[data-testid*="Icon"],
+[data-testid*="Icon"]:not([data-testid="stChatMessageAvatarImage"]),
 [data-testid*="icon"],
-.material-symbols-rounded,
-.material-symbols-outlined,
-.material-icons,
 [data-testid="stSidebarCollapseButton"] *,
+[data-testid="stExpandSidebarButton"] *,
 [data-testid="collapsedControl"] *,
 [data-testid="stToolbar"] *,
 [data-testid="stToolbarActions"] *,
 [data-testid="stHeader"] button *,
-button[kind="header"] *,
-span[translate="no"] {
+[data-testid="stMainMenu"] *,
+[data-baseweb="popover"] [translate="no"],
+[data-baseweb="menu"] [translate="no"],
+.material-symbols-rounded,
+.material-symbols-outlined,
+.material-icons,
+span[translate="no"],
+span[class*="e1vmumty"] {
   font-family: 'Material Symbols Rounded', 'Material Symbols Outlined', 'Material Icons' !important;
+  font-weight: normal !important;
+  font-style: normal !important;
   font-feature-settings: 'liga' 1 !important;
   -webkit-font-feature-settings: 'liga' 1 !important;
   text-transform: none !important;
@@ -150,6 +156,7 @@ span[translate="no"] {
   white-space: nowrap !important;
   direction: ltr !important;
   -webkit-font-smoothing: antialiased !important;
+  display: inline-block !important;
 }
 
 code, pre, pre *, code *, kbd {
