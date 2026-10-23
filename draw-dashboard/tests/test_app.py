@@ -23,15 +23,29 @@ def test_precomputed_library_loads_immediately():
     assert metrics["Rule check"] == "Passed"
     assert "True compute time" in metrics
     assert metrics["True compute time"].endswith("s")
-    # Verify results table contains 36 clubs
+
+    # Verify animated table is rendered with fading green animation
+    assert any("fadeGreenSweep" in m.value for m in at.markdown)
+
+    # Switch to standard dataframe view and verify 36 clubs
+    view_radio = next(r for r in at.radio if "Table view" in r.label or getattr(r, "key", "").startswith("view_mode"))
+    view_radio.set_value("Standard dataframe").run()
+    assert not at.exception, at.exception
     assert any(len(df.value) == 36 for df in at.dataframe)
 
 
 def test_seed_selection_and_csv_download():
     at = _boot()
-    # Pre-computed mode is default
     # Verify download buttons are generated
     assert len(at.download_button) >= 2
+
+
+def test_replay_animation():
+    at = _boot()
+    replay_btn = next((b for b in at.button if "Replay animation" in b.label), None)
+    if replay_btn:
+        replay_btn.click().run()
+        assert not at.exception, at.exception
 
 
 def test_10_draw_sample_aggregation():

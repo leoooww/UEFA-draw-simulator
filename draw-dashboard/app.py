@@ -141,6 +141,143 @@ def team_schedule(draw: dict, club: str) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def render_animated_results_table(df: pd.DataFrame, anim_key: int = 0) -> str:
+    """Render the results table with a top-left to bottom-right fading green wave animation for team names."""
+    cols = list(df.columns)
+    team_cols = {
+        "Club",
+        "Home vs A", "Away at A",
+        "Home vs B", "Away at B",
+        "Home vs C", "Away at C",
+        "Home vs D", "Away at D",
+    }
+
+    html = [
+        f"""<style>
+@keyframes fadeGreenSweep_{anim_key} {{
+  0% {{
+    opacity: 0;
+    transform: scale(0.92) translateY(3px);
+    background-color: rgba(34, 197, 94, 0.65);
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.45);
+    color: #ffffff;
+  }}
+  35% {{
+    opacity: 1;
+    transform: scale(1.02) translateY(0);
+    background-color: rgba(34, 197, 94, 0.4);
+    box-shadow: 0 0 6px rgba(34, 197, 94, 0.3);
+    color: #15803d;
+  }}
+  100% {{
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    background-color: transparent;
+    box-shadow: none;
+    color: inherit;
+  }}
+}}
+
+.table-wrap-{anim_key} {{
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 460px;
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}}
+
+.draw-table-{anim_key} {{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  font-family: inherit;
+  text-align: left;
+}}
+
+.draw-table-{anim_key} th {{
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #1e293b;
+  color: #f8fafc;
+  padding: 8px 10px;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.3);
+  white-space: nowrap;
+}}
+
+.draw-table-{anim_key} td {{
+  padding: 6px 10px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.12);
+  white-space: nowrap;
+}}
+
+.draw-table-{anim_key} tr:hover {{
+  background-color: rgba(128, 128, 128, 0.06);
+}}
+
+.anim-team-{anim_key} {{
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  will-change: transform, opacity, background-color;
+  animation-name: fadeGreenSweep_{anim_key};
+  animation-duration: 0.85s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}}
+
+.anim-cell-{anim_key} {{
+  display: inline-block;
+  will-change: transform, opacity;
+  animation-name: fadeGreenSweep_{anim_key};
+  animation-duration: 0.85s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}}
+
+.pot-pill {{
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #111827;
+}}
+</style>
+<div class="table-wrap-{anim_key}">
+<table class="draw-table-{anim_key}">
+  <thead>
+    <tr>
+"""
+    ]
+    for col in cols:
+        html.append(f"      <th>{col}</th>\n")
+    html.append("    </tr>\n  </thead>\n  <tbody>\n")
+
+    for r, (_, row) in enumerate(df.iterrows()):
+        html.append("    <tr>\n")
+        for c, col in enumerate(cols):
+            val = row[col]
+            delay = round(r * 0.035 + c * 0.025, 3)
+            if col in team_cols:
+                content = f'<span class="anim-team-{anim_key}" style="animation-delay: {delay}s;">{val}</span>'
+            elif col == "Pot":
+                pot_color = POT_COLORS.get(str(val), "#e2e8f0")
+                content = f'<span class="anim-cell-{anim_key}" style="animation-delay: {delay}s;"><span class="pot-pill" style="background-color: {pot_color};">Pot {val}</span></span>'
+            else:
+                content = f'<span class="anim-cell-{anim_key}" style="animation-delay: {delay}s;">{val}</span>'
+            html.append(f"      <td>{content}</td>\n")
+        html.append("    </tr>\n")
+
+    html.append("  </tbody>\n</table>\n</div>\n")
+    return "".join(html)
+
+
+
 def aggregate_strength(draws: list[dict]) -> pd.DataFrame:
     rows = [
         {"Club": t["club"], "Pot": t["pot"], "elo": t["elo_sum"], "uefa": t["uefa_sum"]}
@@ -373,7 +510,26 @@ with tab_result:
         st.error("Rule violations: " + "; ".join(draw["violations"]))
 
     df = teams_frame(draw)
-    st.dataframe(df, hide_index=True, width="stretch", height=420)
+
+    col_view, col_replay = st.columns([3, 1])
+    with col_view:
+        view_mode = st.radio(
+            "Table view",
+            ["Animated table", "Standard dataframe"],
+            horizontal=True,
+            label_visibility="collapsed",
+            key=f"view_mode_{idx}",
+        )
+    with col_replay:
+        if st.button("Replay animation", width="stretch", key=f"replay_{idx}"):
+            st.session_state["anim_nonce"] = st.session_state.get("anim_nonce", 0) + 1
+            st.rerun()
+
+    if view_mode == "Animated table":
+        anim_nonce = st.session_state.get("anim_nonce", 0) + idx * 10
+        st.markdown(render_animated_results_table(df, anim_nonce), unsafe_allow_html=True)
+    else:
+        st.dataframe(df, hide_index=True, width="stretch", height=420)
     c1, c2 = st.columns([1, 1])
     c1.download_button(
         "Download fixtures (CSV)",
