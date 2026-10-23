@@ -1,0 +1,32 @@
+# System
+.DS_Store
+*/.DS_Store
+
+# Agent configs
+.agents/
+
+# Python
+.venv/
+venv/
+*/venv/
+*/.venv/
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*/.pytest_cache/
+
+# Node & Angular
+node_modules/
+*/node_modules/
+.angular/
+*/.angular/
+dist/
+*/dist/
+
+# Julia
+*/.julia/
+
+# Logs
+*.log

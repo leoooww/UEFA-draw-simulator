@@ -1,0 +1,9 @@
+services:
+  draw-dashboard:
+    build: .
+    image: uefa-draw-dashboard
+    ports:
+      - "8501:8501"
+    environment:
+      MAX_DRAWS: "25"
+    restart: unless-stopped

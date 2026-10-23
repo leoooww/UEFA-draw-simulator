@@ -1,0 +1,336 @@
+Tirage pour l'équipe : Barcelona
+Adversaires possibles du pot 1 : [("ManCity", "Bayern"), ("ManCity", "PSG"), ("ManCity", "Liverpool"), ("ManCity", "Inter"), ("ManCity", "Dortmund"), ("ManCity", "Leipzig"), ("Bayern", "ManCity"), ("Bayern", "PSG"), ("Bayern", "Liverpool"), ("Bayern", "Inter"), ("Bayern", "Dortmund"), ("Bayern", "Leipzig"), ("PSG", "ManCity"), ("PSG", "Bayern"), ("PSG", "Liverpool"), ("PSG", "Inter"), ("PSG", "Dortmund"), ("PSG", "Leipzig"), ("Liverpool", "ManCity"), ("Liverpool", "Bayern"), ("Liverpool", "PSG"), ("Liverpool", "Inter"), ("Liverpool", "Dortmund"), ("Liverpool", "Leipzig"), ("Inter", "ManCity"), ("Inter", "Bayern"), ("Inter", "PSG"), ("Inter", "Liverpool"), ("Inter", "Dortmund"), ("Inter", "Leipzig"), ("Dortmund", "ManCity"), ("Dortmund", "Bayern"), ("Dortmund", "PSG"), ("Dortmund", "Liverpool"), ("Dortmund", "Inter"), ("Dortmund", "Leipzig"), ("Leipzig", "ManCity"), ("Leipzig", "Bayern"), ("Leipzig", "PSG"), ("Leipzig", "Liverpool"), ("Leipzig", "Inter"), ("Leipzig", "Dortmund")]
+Adversaires possibles du pot 2 : [("Leverkusen", "Atalanta"), ("Leverkusen", "Juventus"), ("Leverkusen", "Benfica"), ("Leverkusen", "Arsenal"), ("Leverkusen", "Brugge"), ("Leverkusen", "Shakhtar"), ("Leverkusen", "Milan"), ("Atalanta", "Leverkusen"), ("Atalanta", "Juventus"), ("Atalanta", "Benfica"), ("Atalanta", "Arsenal"), ("Atalanta", "Brugge"), ("Atalanta", "Shakhtar"), ("Atalanta", "Milan"), ("Juventus", "Leverkusen"), ("Juventus", "Atalanta"), ("Juventus", "Benfica"), ("Juventus", "Arsenal"), ("Juventus", "Brugge"), ("Juventus", "Shakhtar"), ("Juventus", "Milan"), ("Benfica", "Leverkusen"), ("Benfica", "Atalanta"), ("Benfica", "Juventus"), ("Benfica", "Arsenal"), ("Benfica", "Brugge"), ("Benfica", "Shakhtar"), ("Benfica", "Milan"), ("Arsenal", "Leverkusen"), ("Arsenal", "Atalanta"), ("Arsenal", "Juventus"), ("Arsenal", "Benfica"), ("Arsenal", "Brugge"), ("Arsenal", "Shakhtar"), ("Arsenal", "Milan"), ("Brugge", "Leverkusen"), ("Brugge", "Atalanta"), ("Brugge", "Juventus"), ("Brugge", "Benfica"), ("Brugge", "Arsenal"), ("Brugge", "Shakhtar"), ("Brugge", "Milan"), ("Shakhtar", "Leverkusen"), ("Shakhtar", "Atalanta"), ("Shakhtar", "Juventus"), ("Shakhtar", "Benfica"), ("Shakhtar", "Arsenal"), ("Shakhtar", "Brugge"), ("Shakhtar", "Milan"), ("Milan", "Leverkusen"), ("Milan", "Atalanta"), ("Milan", "Juventus"), ("Milan", "Benfica"), ("Milan", "Arsenal"), ("Milan", "Brugge"), ("Milan", "Shakhtar")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Sporting"), ("Feyenoord", "Eindhoven"), ("Feyenoord", "Dinamo"), ("Feyenoord", "Salzburg"), ("Feyenoord", "Lille"), ("Feyenoord", "Crvena"), ("Feyenoord", "YB"), ("Feyenoord", "Celtic"), ("Sporting", "Feyenoord"), ("Sporting", "Eindhoven"), ("Sporting", "Dinamo"), ("Sporting", "Salzburg"), ("Sporting", "Lille"), ("Sporting", "Crvena"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("Eindhoven", "Feyenoord"), ("Eindhoven", "Sporting"), ("Eindhoven", "Dinamo"), ("Eindhoven", "Salzburg"), ("Eindhoven", "Lille"), ("Eindhoven", "Crvena"), ("Eindhoven", "YB"), ("Eindhoven", "Celtic"), ("Dinamo", "Feyenoord"), ("Dinamo", "Sporting"), ("Dinamo", "Eindhoven"), ("Dinamo", "Salzburg"), ("Dinamo", "Lille"), ("Dinamo", "Crvena"), ("Dinamo", "YB"), ("Dinamo", "Celtic"), ("Salzburg", "Feyenoord"), ("Salzburg", "Sporting"), ("Salzburg", "Eindhoven"), ("Salzburg", "Dinamo"), ("Salzburg", "Lille"), ("Salzburg", "Crvena"), ("Salzburg", "YB"), ("Salzburg", "Celtic"), ("Lille", "Feyenoord"), ("Lille", "Sporting"), ("Lille", "Eindhoven"), ("Lille", "Dinamo"), ("Lille", "Salzburg"), ("Lille", "Crvena"), ("Lille", "YB"), ("Lille", "Celtic"), ("Crvena", "Feyenoord"), ("Crvena", "Sporting"), ("Crvena", "Eindhoven"), ("Crvena", "Dinamo"), ("Crvena", "Salzburg"), ("Crvena", "Lille"), ("Crvena", "YB"), ("Crvena", "Celtic"), ("YB", "Feyenoord"), ("YB", "Sporting"), ("YB", "Eindhoven"), ("YB", "Dinamo"), ("YB", "Salzburg"), ("YB", "Lille"), ("YB", "Crvena"), ("YB", "Celtic"), ("Celtic", "Feyenoord"), ("Celtic", "Sporting"), ("Celtic", "Eindhoven"), ("Celtic", "Dinamo"), ("Celtic", "Salzburg"), ("Celtic", "Lille"), ("Celtic", "Crvena"), ("Celtic", "YB")]
+Adversaires possibles du pot 4 : [("Bratislava", "Monaco"), ("Bratislava", "Sparta"), ("Bratislava", "Aston Villa"), ("Bratislava", "Bologna"), ("Bratislava", "Stuttgart"), ("Bratislava", "Sturm Graz"), ("Bratislava", "Brest"), ("Monaco", "Bratislava"), ("Monaco", "Sparta"), ("Monaco", "Aston Villa"), ("Monaco", "Bologna"), ("Monaco", "Stuttgart"), ("Monaco", "Sturm Graz"), ("Sparta", "Bratislava"), ("Sparta", "Monaco"), ("Sparta", "Aston Villa"), ("Sparta", "Bologna"), ("Sparta", "Stuttgart"), ("Sparta", "Sturm Graz"), ("Sparta", "Brest"), ("Aston Villa", "Bratislava"), ("Aston Villa", "Monaco"), ("Aston Villa", "Sparta"), ("Aston Villa", "Bologna"), ("Aston Villa", "Stuttgart"), ("Aston Villa", "Sturm Graz"), ("Aston Villa", "Brest"), ("Bologna", "Bratislava"), ("Bologna", "Monaco"), ("Bologna", "Sparta"), ("Bologna", "Aston Villa"), ("Bologna", "Stuttgart"), ("Bologna", "Sturm Graz"), ("Bologna", "Brest"), ("Stuttgart", "Bratislava"), ("Stuttgart", "Monaco"), ("Stuttgart", "Sparta"), ("Stuttgart", "Aston Villa"), ("Stuttgart", "Bologna"), ("Stuttgart", "Sturm Graz"), ("Stuttgart", "Brest"), ("Sturm Graz", "Bratislava"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Sparta"), ("Sturm Graz", "Aston Villa"), ("Sturm Graz", "Bologna"), ("Sturm Graz", "Stuttgart"), ("Sturm Graz", "Brest"), ("Brest", "Bratislava"), ("Brest", "Sparta"), ("Brest", "Aston Villa"), ("Brest", "Bologna"), ("Brest", "Stuttgart"), ("Brest", "Sturm Graz")]
+[("Barcelona", ""), ("PSG", "Bayern"), ("Brugge", "Milan"), ("Feyenoord", "Sporting"), ("Bratislava", "Stuttgart")]
+
+---
+
+Tirage pour l'équipe : Real
+Adversaires possibles du pot 1 : [("ManCity", "PSG"), ("ManCity", "Liverpool"), ("ManCity", "Inter"), ("ManCity", "Dortmund"), ("ManCity", "Leipzig"), ("Bayern", "ManCity"), ("Bayern", "PSG"), ("Bayern", "Liverpool"), ("Bayern", "Inter"), ("Bayern", "Dortmund"), ("Bayern", "Leipzig"), ("Liverpool", "ManCity"), ("Liverpool", "PSG"), ("Liverpool", "Inter"), ("Liverpool", "Dortmund"), ("Liverpool", "Leipzig"), ("Inter", "ManCity"), ("Inter", "PSG"), ("Inter", "Liverpool"), ("Inter", "Dortmund"), ("Inter", "Leipzig"), ("Dortmund", "ManCity"), ("Dortmund", "PSG"), ("Dortmund", "Liverpool"), ("Dortmund", "Inter"), ("Dortmund", "Leipzig"), ("Leipzig", "ManCity"), ("Leipzig", "PSG"), ("Leipzig", "Liverpool"), ("Leipzig", "Inter"), ("Leipzig", "Dortmund")]
+Adversaires possibles du pot 2 : [("Leverkusen", "Atalanta"), ("Leverkusen", "Juventus"), ("Leverkusen", "Benfica"), ("Leverkusen", "Brugge"), ("Leverkusen", "Shakhtar"), ("Atalanta", "Leverkusen"), ("Atalanta", "Juventus"), ("Atalanta", "Benfica"), ("Atalanta", "Brugge"), ("Atalanta", "Shakhtar"), ("Juventus", "Leverkusen"), ("Juventus", "Atalanta"), ("Juventus", "Benfica"), ("Juventus", "Brugge"), ("Juventus", "Shakhtar"), ("Benfica", "Leverkusen"), ("Benfica", "Atalanta"), ("Benfica", "Juventus"), ("Benfica", "Brugge"), ("Benfica", "Shakhtar"), ("Shakhtar", "Leverkusen"), ("Shakhtar", "Atalanta"), ("Shakhtar", "Juventus"), ("Shakhtar", "Benfica"), ("Shakhtar", "Brugge"), ("Milan", "Leverkusen"), ("Milan", "Atalanta"), ("Milan", "Juventus"), ("Milan", "Benfica"), ("Milan", "Brugge"), ("Milan", "Shakhtar")]
+Adversaires possibles du pot 3 : [("Sporting", "Feyenoord"), ("Sporting", "Eindhoven"), ("Sporting", "Dinamo"), ("Sporting", "Salzburg"), ("Sporting", "Lille"), ("Sporting", "Crvena"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("Eindhoven", "Feyenoord"), ("Eindhoven", "Dinamo"), ("Eindhoven", "Salzburg"), ("Eindhoven", "Lille"), ("Eindhoven", "Crvena"), ("Eindhoven", "YB"), ("Eindhoven", "Celtic"), ("Dinamo", "Feyenoord"), ("Dinamo", "Eindhoven"), ("Dinamo", "Salzburg"), ("Dinamo", "Lille"), ("Dinamo", "Crvena"), ("Dinamo", "YB"), ("Dinamo", "Celtic"), ("Salzburg", "Feyenoord"), ("Salzburg", "Eindhoven"), ("Salzburg", "Dinamo"), ("Salzburg", "Lille"), ("Salzburg", "Crvena"), ("Salzburg", "YB"), ("Salzburg", "Celtic"), ("Lille", "Feyenoord"), ("Lille", "Eindhoven"), ("Lille", "Dinamo"), ("Lille", "Salzburg"), ("Lille", "Crvena"), ("Lille", "YB"), ("Lille", "Celtic"), ("Crvena", "Feyenoord"), ("Crvena", "Eindhoven"), ("Crvena", "Dinamo"), ("Crvena", "Salzburg"), ("Crvena", "Lille"), ("Crvena", "YB"), ("Crvena", "Celtic"), ("YB", "Feyenoord"), ("YB", "Eindhoven"), ("YB", "Dinamo"), ("YB", "Salzburg"), ("YB", "Lille"), ("YB", "Crvena"), ("YB", "Celtic"), ("Celtic", "Feyenoord"), ("Celtic", "Eindhoven"), ("Celtic", "Dinamo"), ("Celtic", "Salzburg"), ("Celtic", "Lille"), ("Celtic", "Crvena"), ("Celtic", "YB")]
+Adversaires possibles du pot 4 : [("Monaco", "Bratislava"), ("Monaco", "Sparta"), ("Monaco", "Bologna"), ("Monaco", "Sturm Graz"), ("Monaco", "Brest"), ("Sparta", "Bratislava"), ("Sparta", "Monaco"), ("Sparta", "Bologna"), ("Sparta", "Sturm Graz"), ("Sparta", "Brest"), ("Bologna", "Bratislava"), ("Bologna", "Monaco"), ("Bologna", "Sparta"), ("Bologna", "Sturm Graz"), ("Bologna", "Brest"), ("Stuttgart", "Bratislava"), ("Stuttgart", "Monaco"), ("Stuttgart", "Sparta"), ("Stuttgart", "Bologna"), ("Stuttgart", "Sturm Graz"), ("Stuttgart", "Brest"), ("Sturm Graz", "Bratislava"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Sparta"), ("Sturm Graz", "Bologna"), ("Sturm Graz", "Brest"), ("Brest", "Bratislava"), ("Brest", "Monaco"), ("Brest", "Sparta"), ("Brest", "Bologna"), ("Brest", "Sturm Graz")]
+[("Real", ""), ("ManCity", "Liverpool"), ("Juventus", "Leverkusen"), ("YB", "Salzburg"), ("Bologna", "Sparta")]
+
+---
+
+Tirage pour l'équipe : Inter
+Adversaires possibles du pot 1 : [("Bayern", "Dortmund"), ("Bayern", "Leipzig"), ("Dortmund", "Leipzig"), ("Leipzig", "Dortmund")]
+Adversaires possibles du pot 2 : [("Atlético", "Benfica"), ("Atlético", "Arsenal"), ("Atlético", "Brugge"), ("Atlético", "Shakhtar"), ("Benfica", "Atlético"), ("Benfica", "Arsenal"), ("Benfica", "Brugge"), ("Benfica", "Shakhtar"), ("Arsenal", "Atlético"), ("Arsenal", "Benfica"), ("Arsenal", "Brugge"), ("Arsenal", "Shakhtar"), ("Shakhtar", "Atlético"), ("Shakhtar", "Benfica"), ("Shakhtar", "Arsenal"), ("Shakhtar", "Brugge")]
+Adversaires possibles du pot 3 : [("Sporting", "Feyenoord"), ("Sporting", "Eindhoven"), ("Sporting", "Dinamo"), ("Sporting", "Lille"), ("Sporting", "Crvena"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("Eindhoven", "Feyenoord"), ("Eindhoven", "Dinamo"), ("Eindhoven", "Lille"), ("Eindhoven", "Crvena"), ("Eindhoven", "YB"), ("Eindhoven", "Celtic"), ("Dinamo", "Feyenoord"), ("Dinamo", "Eindhoven"), ("Dinamo", "Lille"), ("Dinamo", "Crvena"), ("Dinamo", "YB"), ("Dinamo", "Celtic"), ("Salzburg", "Feyenoord"), ("Salzburg", "Eindhoven"), ("Salzburg", "Dinamo"), ("Salzburg", "Lille"), ("Salzburg", "Crvena"), ("Salzburg", "YB"), ("Salzburg", "Celtic"), ("Lille", "Feyenoord"), ("Lille", "Eindhoven"), ("Lille", "Dinamo"), ("Lille", "Crvena"), ("Lille", "YB"), ("Lille", "Celtic"), ("Crvena", "Feyenoord"), ("Crvena", "Eindhoven"), ("Crvena", "Dinamo"), ("Crvena", "Lille"), ("Crvena", "YB"), ("Crvena", "Celtic"), ("Celtic", "Feyenoord"), ("Celtic", "Eindhoven"), ("Celtic", "Dinamo"), ("Celtic", "Lille"), ("Celtic", "Crvena"), ("Celtic", "YB")]
+Adversaires possibles du pot 4 : [("Monaco", "Bratislava"), ("Monaco", "Aston Villa"), ("Monaco", "Girona"), ("Monaco", "Sturm Graz"), ("Sparta", "Bratislava"), ("Sparta", "Monaco"), ("Sparta", "Aston Villa"), ("Sparta", "Girona"), ("Sparta", "Sturm Graz"), ("Sparta", "Brest"), ("Aston Villa", "Bratislava"), ("Aston Villa", "Monaco"), ("Aston Villa", "Girona"), ("Aston Villa", "Sturm Graz"), ("Aston Villa", "Brest"), ("Girona", "Bratislava"), ("Girona", "Monaco"), ("Girona", "Aston Villa"), ("Girona", "Sturm Graz"), ("Girona", "Brest"), ("Sturm Graz", "Bratislava"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Aston Villa"), ("Sturm Graz", "Girona"), ("Sturm Graz", "Brest"), ("Brest", "Bratislava"), ("Brest", "Aston Villa"), ("Brest", "Girona"), ("Brest", "Sturm Graz")]
+[("Inter", ""), ("Dortmund", "Leipzig"), ("Shakhtar", "Arsenal"), ("Lille", "Crvena"), ("Sparta", "Brest")]
+
+---
+
+Tirage pour l'équipe : Leipzig
+Adversaires possibles du pot 1 : [("Inter", "ManCity"), ("Inter", "PSG")]
+Adversaires possibles du pot 2 : [("Atlético", "Atalanta"), ("Atlético", "Juventus"), ("Atlético", "Benfica"), ("Atlético", "Brugge"), ("Atlético", "Shakhtar"), ("Atalanta", "Atlético"), ("Atalanta", "Benfica"), ("Atalanta", "Brugge"), ("Atalanta", "Shakhtar"), ("Benfica", "Atlético"), ("Benfica", "Atalanta"), ("Benfica", "Juventus"), ("Benfica", "Brugge"), ("Benfica", "Shakhtar"), ("Arsenal", "Atlético"), ("Arsenal", "Atalanta"), ("Arsenal", "Juventus"), ("Arsenal", "Benfica"), ("Arsenal", "Brugge"), ("Arsenal", "Shakhtar"), ("Milan", "Atlético"), ("Milan", "Benfica"), ("Milan", "Brugge"), ("Milan", "Shakhtar")]
+Adversaires possibles du pot 3 : [("Sporting", "Feyenoord"), ("Sporting", "Eindhoven"), ("Sporting", "Dinamo"), ("Sporting", "Lille"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("Eindhoven", "Feyenoord"), ("Eindhoven", "Dinamo"), ("Eindhoven", "Lille"), ("Eindhoven", "YB"), ("Eindhoven", "Celtic"), ("Dinamo", "Feyenoord"), ("Dinamo", "Eindhoven"), ("Dinamo", "Lille"), ("Dinamo", "YB"), ("Dinamo", "Celtic"), ("Salzburg", "Feyenoord"), ("Salzburg", "Eindhoven"), ("Salzburg", "Dinamo"), ("Salzburg", "Lille"), ("Salzburg", "YB"), ("Salzburg", "Celtic"), ("Crvena", "Feyenoord"), ("Crvena", "Eindhoven"), ("Crvena", "Dinamo"), ("Crvena", "Lille"), ("Crvena", "YB"), ("Crvena", "Celtic"), ("Celtic", "Feyenoord"), ("Celtic", "Eindhoven"), ("Celtic", "Dinamo"), ("Celtic", "Lille"), ("Celtic", "YB")]
+Adversaires possibles du pot 4 : [("Monaco", "Bratislava"), ("Monaco", "Aston Villa"), ("Monaco", "Bologna"), ("Monaco", "Girona"), ("Monaco", "Sturm Graz"), ("Aston Villa", "Bratislava"), ("Aston Villa", "Monaco"), ("Aston Villa", "Bologna"), ("Aston Villa", "Girona"), ("Aston Villa", "Sturm Graz"), ("Girona", "Bratislava"), ("Girona", "Monaco"), ("Girona", "Aston Villa"), ("Girona", "Bologna"), ("Girona", "Sturm Graz"), ("Sturm Graz", "Bratislava"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Aston Villa"), ("Sturm Graz", "Bologna"), ("Sturm Graz", "Girona"), ("Brest", "Bratislava"), ("Brest", "Monaco"), ("Brest", "Aston Villa"), ("Brest", "Bologna"), ("Brest", "Girona"), ("Brest", "Sturm Graz")]
+[("Leipzig", ""), ("Inter", "ManCity"), ("Atlético", "Shakhtar"), ("Crvena", "Eindhoven"), ("Girona", "Bratislava")]
+
+---
+
+Tirage pour l'équipe : Liverpool
+Adversaires possibles du pot 1 : [("Real", "Dortmund")]
+Adversaires possibles du pot 2 : [("Leverkusen", "Atlético"), ("Leverkusen", "Atalanta"), ("Leverkusen", "Juventus"), ("Leverkusen", "Benfica"), ("Leverkusen", "Brugge"), ("Atalanta", "Atlético"), ("Atalanta", "Juventus"), ("Atalanta", "Benfica"), ("Atalanta", "Brugge"), ("Benfica", "Atlético"), ("Benfica", "Atalanta"), ("Benfica", "Juventus"), ("Benfica", "Brugge"), ("Milan", "Atlético"), ("Milan", "Atalanta"), ("Milan", "Juventus"), ("Milan", "Benfica"), ("Milan", "Brugge")]
+Adversaires possibles du pot 3 : [("Sporting", "Feyenoord"), ("Sporting", "Dinamo"), ("Sporting", "Lille"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("Eindhoven", "Feyenoord"), ("Eindhoven", "Dinamo"), ("Eindhoven", "Lille"), ("Eindhoven", "YB"), ("Eindhoven", "Celtic"), ("Dinamo", "Feyenoord"), ("Dinamo", "Lille"), ("Dinamo", "YB"), ("Dinamo", "Celtic"), ("Salzburg", "Feyenoord"), ("Salzburg", "Dinamo"), ("Salzburg", "Lille"), ("Salzburg", "YB"), ("Salzburg", "Celtic"), ("Celtic", "Feyenoord"), ("Celtic", "Dinamo"), ("Celtic", "Lille"), ("Celtic", "YB")]
+Adversaires possibles du pot 4 : [("Monaco", "Bologna"), ("Monaco", "Sturm Graz"), ("Stuttgart", "Monaco"), ("Stuttgart", "Bologna"), ("Stuttgart", "Sturm Graz"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Bologna"), ("Brest", "Bologna"), ("Brest", "Sturm Graz")]
+[("Liverpool", ""), ("Real", "Dortmund"), ("Benfica", "Atlético"), ("Celtic", "Lille"), ("Monaco", "Sturm Graz")]
+
+---
+
+Tirage pour l'équipe : PSG
+Adversaires possibles du pot 1 : [("Bayern", "Barcelona")]
+Adversaires possibles du pot 2 : [("Leverkusen", "Atalanta"), ("Leverkusen", "Juventus"), ("Leverkusen", "Benfica"), ("Leverkusen", "Brugge"), ("Atalanta", "Juventus"), ("Atalanta", "Benfica"), ("Atalanta", "Brugge"), ("Arsenal", "Atalanta"), ("Arsenal", "Juventus"), ("Arsenal", "Benfica"), ("Arsenal", "Brugge"), ("Milan", "Atalanta"), ("Milan", "Juventus"), ("Milan", "Benfica"), ("Milan", "Brugge")]
+Adversaires possibles du pot 3 : [("Sporting", "Feyenoord"), ("Sporting", "Dinamo"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("Eindhoven", "Feyenoord"), ("Eindhoven", "Dinamo"), ("Eindhoven", "YB"), ("Eindhoven", "Celtic"), ("Dinamo", "Feyenoord"), ("Dinamo", "YB"), ("Dinamo", "Celtic"), ("Salzburg", "Feyenoord"), ("Salzburg", "Dinamo"), ("Salzburg", "YB"), ("Salzburg", "Celtic")]
+Adversaires possibles du pot 4 : [("Stuttgart", "Aston Villa"), ("Stuttgart", "Bologna"), ("Stuttgart", "Girona")]
+[("PSG", ""), ("Bayern", "Barcelona"), ("Atalanta", "Brugge"), ("Sporting", "Celtic"), ("Stuttgart", "Girona")]
+
+---
+
+Tirage pour l'équipe : Bayern
+Adversaires possibles du pot 1 : [("Barcelona", "PSG")]
+Adversaires possibles du pot 2 : [("Arsenal", "Atalanta"), ("Arsenal", "Juventus")]
+Adversaires possibles du pot 3 : [("Eindhoven", "Feyenoord"), ("Eindhoven", "Dinamo"), ("Eindhoven", "YB"), ("Dinamo", "Feyenoord"), ("Dinamo", "YB"), ("Salzburg", "Feyenoord"), ("Salzburg", "Dinamo"), ("Salzburg", "YB")]
+Adversaires possibles du pot 4 : [("Aston Villa", "Monaco"), ("Aston Villa", "Bologna"), ("Sturm Graz", "Aston Villa"), ("Brest", "Aston Villa")]
+[("Bayern", ""), ("Barcelona", "PSG"), ("Arsenal", "Atalanta"), ("Eindhoven", "Dinamo"), ("Brest", "Aston Villa")]
+
+---
+
+Tirage pour l'équipe : ManCity
+Adversaires possibles du pot 1 : [("Leipzig", "Real")]
+Adversaires possibles du pot 2 : [("Leverkusen", "Juventus")]
+Adversaires possibles du pot 3 : [("Dinamo", "Feyenoord"), ("Dinamo", "YB"), ("Salzburg", "Feyenoord"), ("Salzburg", "YB")]
+Adversaires possibles du pot 4 : [("Sturm Graz", "Bologna")]
+[("ManCity", ""), ("Leipzig", "Real"), ("Leverkusen", "Juventus"), ("Dinamo", "YB"), ("Sturm Graz", "Bologna")]
+
+---
+
+Tirage pour l'équipe : Dortmund
+Adversaires possibles du pot 1 : [("Liverpool", "Inter")]
+Adversaires possibles du pot 2 : [("Milan", "Benfica")]
+Adversaires possibles du pot 3 : [("Salzburg", "Feyenoord")]
+Adversaires possibles du pot 4 : [("Aston Villa", "Monaco")]
+[("Dortmund", ""), ("Liverpool", "Inter"), ("Milan", "Benfica"), ("Salzburg", "Feyenoord"), ("Aston Villa", "Monaco")]
+
+---
+
+
+
+
+Tirage pour l'équipe : Atalanta
+Adversaires possibles du pot 1 : [("Bayern", "PSG")]
+Adversaires possibles du pot 2 : [("Leverkusen", "Atlético"), ("Leverkusen", "Benfica"), ("Leverkusen", "Arsenal"), ("Leverkusen", "Brugge"), ("Leverkusen", "Shakhtar"), ("Atlético", "Leverkusen"), ("Atlético", "Benfica"), ("Atlético", "Arsenal"), ("Atlético", "Brugge"), ("Atlético", "Shakhtar"), ("Benfica", "Leverkusen"), ("Benfica", "Atlético"), ("Benfica", "Arsenal"), ("Benfica", "Brugge"), ("Benfica", "Shakhtar"), ("Arsenal", "Leverkusen"), ("Arsenal", "Atlético"), ("Arsenal", "Benfica"), ("Arsenal", "Brugge"), ("Arsenal", "Shakhtar"), ("Brugge", "Leverkusen"), ("Brugge", "Atlético"), ("Brugge", "Benfica"), ("Brugge", "Arsenal"), ("Brugge", "Shakhtar"), ("Shakhtar", "Leverkusen"), ("Shakhtar", "Atlético"), ("Shakhtar", "Benfica"), ("Shakhtar", "Arsenal"), ("Shakhtar", "Brugge")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Sporting"), ("Feyenoord", "Eindhoven"), ("Feyenoord", "Dinamo"), ("Feyenoord", "Salzburg"), ("Feyenoord", "Lille"), ("Feyenoord", "Crvena"), ("Feyenoord", "YB"), ("Feyenoord", "Celtic"), ("Sporting", "Feyenoord"), ("Sporting", "Eindhoven"), ("Sporting", "Dinamo"), ("Sporting", "Salzburg"), ("Sporting", "Lille"), ("Sporting", "Crvena"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("Eindhoven", "Feyenoord"), ("Eindhoven", "Sporting"), ("Eindhoven", "Dinamo"), ("Eindhoven", "Salzburg"), ("Eindhoven", "Lille"), ("Eindhoven", "Crvena"), ("Eindhoven", "YB"), ("Eindhoven", "Celtic"), ("Dinamo", "Feyenoord"), ("Dinamo", "Sporting"), ("Dinamo", "Eindhoven"), ("Dinamo", "Salzburg"), ("Dinamo", "Lille"), ("Dinamo", "Crvena"), ("Dinamo", "YB"), ("Dinamo", "Celtic"), ("Salzburg", "Feyenoord"), ("Salzburg", "Sporting"), ("Salzburg", "Eindhoven"), ("Salzburg", "Dinamo"), ("Salzburg", "Lille"), ("Salzburg", "Crvena"), ("Salzburg", "YB"), ("Salzburg", "Celtic"), ("Lille", "Feyenoord"), ("Lille", "Sporting"), ("Lille", "Eindhoven"), ("Lille", "Dinamo"), ("Lille", "Salzburg"), ("Lille", "Crvena"), ("Lille", "YB"), ("Lille", "Celtic"), ("Crvena", "Feyenoord"), ("Crvena", "Sporting"), ("Crvena", "Eindhoven"), ("Crvena", "Dinamo"), ("Crvena", "Salzburg"), ("Crvena", "Lille"), ("Crvena", "YB"), ("Crvena", "Celtic"), ("YB", "Feyenoord"), ("YB", "Sporting"), ("YB", "Eindhoven"), ("YB", "Dinamo"), ("YB", "Salzburg"), ("YB", "Lille"), ("YB", "Crvena"), ("YB", "Celtic"), ("Celtic", "Feyenoord"), ("Celtic", "Sporting"), ("Celtic", "Eindhoven"), ("Celtic", "Dinamo"), ("Celtic", "Salzburg"), ("Celtic", "Lille"), ("Celtic", "Crvena"), ("Celtic", "YB")]
+Adversaires possibles du pot 4 : [("Bratislava", "Monaco"), ("Bratislava", "Sparta"), ("Bratislava", "Aston Villa"), ("Bratislava", "Girona"), ("Bratislava", "Sturm Graz"), ("Bratislava", "Brest"), ("Monaco", "Bratislava"), ("Monaco", "Sparta"), ("Monaco", "Aston Villa"), ("Monaco", "Girona"), ("Monaco", "Sturm Graz"), ("Sparta", "Bratislava"), ("Sparta", "Monaco"), ("Sparta", "Aston Villa"), ("Sparta", "Girona"), ("Sparta", "Sturm Graz"), ("Sparta", "Brest"), ("Aston Villa", "Bratislava"), ("Aston Villa", "Monaco"), ("Aston Villa", "Sparta"), ("Aston Villa", "Girona"), ("Aston Villa", "Sturm Graz"), ("Aston Villa", "Brest"), ("Girona", "Bratislava"), ("Girona", "Monaco"), ("Girona", "Sparta"), ("Girona", "Aston Villa"), ("Girona", "Sturm Graz"), ("Girona", "Brest"), ("Sturm Graz", "Bratislava"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Sparta"), ("Sturm Graz", "Aston Villa"), ("Sturm Graz", "Girona"), ("Sturm Graz", "Brest"), ("Brest", "Bratislava"), ("Brest", "Sparta"), ("Brest", "Aston Villa"), ("Brest", "Girona"), ("Brest", "Sturm Graz")]
+[("Atalanta", ""), ("Bayern", "PSG"), ("Leverkusen", "Arsenal"), ("Celtic", "Feyenoord"), ("Aston Villa", "Bratislava")]
+
+---
+
+Tirage pour l'équipe : Brugge
+Adversaires possibles du pot 1 : [("PSG", "Barcelona")]
+Adversaires possibles du pot 2 : [("Atlético", "Leverkusen"), ("Atlético", "Juventus"), ("Atlético", "Benfica"), ("Atlético", "Shakhtar"), ("Atlético", "Milan"), ("Juventus", "Leverkusen"), ("Juventus", "Atlético"), ("Juventus", "Benfica"), ("Juventus", "Shakhtar"), ("Juventus", "Milan"), ("Benfica", "Leverkusen"), ("Benfica", "Atlético"), ("Benfica", "Juventus"), ("Benfica", "Shakhtar"), ("Benfica", "Milan"), ("Arsenal", "Leverkusen"), ("Arsenal", "Atlético"), ("Arsenal", "Juventus"), ("Arsenal", "Benfica"), ("Arsenal", "Shakhtar"), ("Arsenal", "Milan"), ("Shakhtar", "Leverkusen"), ("Shakhtar", "Atlético"), ("Shakhtar", "Juventus"), ("Shakhtar", "Benfica"), ("Shakhtar", "Milan"), ("Milan", "Leverkusen"), ("Milan", "Atlético"), ("Milan", "Juventus"), ("Milan", "Benfica"), ("Milan", "Shakhtar")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Sporting"), ("Feyenoord", "Eindhoven"), ("Feyenoord", "Dinamo"), ("Feyenoord", "Salzburg"), ("Feyenoord", "Lille"), ("Feyenoord", "Crvena"), ("Feyenoord", "YB"), ("Feyenoord", "Celtic"), ("Sporting", "Eindhoven"), ("Sporting", "Dinamo"), ("Sporting", "Salzburg"), ("Sporting", "Lille"), ("Sporting", "Crvena"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("Eindhoven", "Sporting"), ("Eindhoven", "Dinamo"), ("Eindhoven", "Salzburg"), ("Eindhoven", "Lille"), ("Eindhoven", "Crvena"), ("Eindhoven", "YB"), ("Eindhoven", "Celtic"), ("Dinamo", "Sporting"), ("Dinamo", "Eindhoven"), ("Dinamo", "Salzburg"), ("Dinamo", "Lille"), ("Dinamo", "Crvena"), ("Dinamo", "YB"), ("Dinamo", "Celtic"), ("Salzburg", "Sporting"), ("Salzburg", "Eindhoven"), ("Salzburg", "Dinamo"), ("Salzburg", "Lille"), ("Salzburg", "Crvena"), ("Salzburg", "YB"), ("Salzburg", "Celtic"), ("Lille", "Sporting"), ("Lille", "Eindhoven"), ("Lille", "Dinamo"), ("Lille", "Salzburg"), ("Lille", "Crvena"), ("Lille", "YB"), ("Lille", "Celtic"), ("Crvena", "Sporting"), ("Crvena", "Eindhoven"), ("Crvena", "Dinamo"), ("Crvena", "Salzburg"), ("Crvena", "Lille"), ("Crvena", "YB"), ("Crvena", "Celtic"), ("YB", "Sporting"), ("YB", "Eindhoven"), ("YB", "Dinamo"), ("YB", "Salzburg"), ("YB", "Lille"), ("YB", "Crvena"), ("YB", "Celtic")]
+Adversaires possibles du pot 4 : [("Bratislava", "Monaco"), ("Bratislava", "Sparta"), ("Bratislava", "Aston Villa"), ("Bratislava", "Bologna"), ("Bratislava", "Girona"), ("Bratislava", "Stuttgart"), ("Bratislava", "Sturm Graz"), ("Bratislava", "Brest"), ("Monaco", "Sparta"), ("Monaco", "Aston Villa"), ("Monaco", "Bologna"), ("Monaco", "Girona"), ("Monaco", "Stuttgart"), ("Monaco", "Sturm Graz"), ("Sparta", "Monaco"), ("Sparta", "Aston Villa"), ("Sparta", "Bologna"), ("Sparta", "Girona"), ("Sparta", "Stuttgart"), ("Sparta", "Sturm Graz"), ("Sparta", "Brest"), ("Bologna", "Monaco"), ("Bologna", "Sparta"), ("Bologna", "Aston Villa"), ("Bologna", "Girona"), ("Bologna", "Stuttgart"), ("Bologna", "Sturm Graz"), ("Bologna", "Brest"), ("Girona", "Monaco"), ("Girona", "Sparta"), ("Girona", "Aston Villa"), ("Girona", "Bologna"), ("Girona", "Stuttgart"), ("Girona", "Sturm Graz"), ("Girona", "Brest"), ("Stuttgart", "Monaco"), ("Stuttgart", "Sparta"), ("Stuttgart", "Aston Villa"), ("Stuttgart", "Bologna"), ("Stuttgart", "Girona"), ("Stuttgart", "Sturm Graz"), ("Stuttgart", "Brest"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Sparta"), ("Sturm Graz", "Aston Villa"), ("Sturm Graz", "Bologna"), ("Sturm Graz", "Girona"), ("Sturm Graz", "Stuttgart"), ("Sturm Graz", "Brest"), ("Brest", "Sparta"), ("Brest", "Aston Villa"), ("Brest", "Bologna"), ("Brest", "Girona"), ("Brest", "Stuttgart"), ("Brest", "Sturm Graz")]
+[("Brugge", ""), ("PSG", "Barcelona"), ("Shakhtar", "Leverkusen"), ("Crvena", "Dinamo"), ("Sparta", "Aston Villa")]
+
+---
+
+Tirage pour l'équipe : Juventus
+Adversaires possibles du pot 1 : [("ManCity", "Real")]
+Adversaires possibles du pot 2 : [("Atlético", "Benfica"), ("Atlético", "Shakhtar"), ("Benfica", "Atlético"), ("Benfica", "Shakhtar")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Sporting"), ("Feyenoord", "Eindhoven"), ("Feyenoord", "Salzburg"), ("Feyenoord", "Lille"), ("Feyenoord", "Crvena"), ("Feyenoord", "YB"), ("Feyenoord", "Celtic"), ("Sporting", "Eindhoven"), ("Sporting", "Salzburg"), ("Sporting", "Lille"), ("Sporting", "Crvena"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("Eindhoven", "Sporting"), ("Eindhoven", "Salzburg"), ("Eindhoven", "Lille"), ("Eindhoven", "Crvena"), ("Eindhoven", "YB"), ("Eindhoven", "Celtic"), ("Dinamo", "Sporting"), ("Dinamo", "Eindhoven"), ("Dinamo", "Salzburg"), ("Dinamo", "Lille"), ("Dinamo", "Crvena"), ("Dinamo", "YB"), ("Dinamo", "Celtic"), ("Salzburg", "Sporting"), ("Salzburg", "Eindhoven"), ("Salzburg", "Lille"), ("Salzburg", "Crvena"), ("Salzburg", "YB"), ("Salzburg", "Celtic"), ("Lille", "Sporting"), ("Lille", "Eindhoven"), ("Lille", "Salzburg"), ("Lille", "Crvena"), ("Lille", "YB"), ("Lille", "Celtic"), ("YB", "Sporting"), ("YB", "Eindhoven"), ("YB", "Salzburg"), ("YB", "Lille"), ("YB", "Crvena"), ("YB", "Celtic")]
+Adversaires possibles du pot 4 : [("Bratislava", "Monaco"), ("Bratislava", "Sparta"), ("Bratislava", "Stuttgart"), ("Bratislava", "Sturm Graz"), ("Bratislava", "Brest"), ("Monaco", "Sparta"), ("Monaco", "Stuttgart"), ("Monaco", "Sturm Graz"), ("Stuttgart", "Monaco"), ("Stuttgart", "Sparta"), ("Stuttgart", "Sturm Graz"), ("Stuttgart", "Brest"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Sparta"), ("Sturm Graz", "Stuttgart"), ("Sturm Graz", "Brest"), ("Brest", "Sparta"), ("Brest", "Stuttgart"), ("Brest", "Sturm Graz")]
+[("Juventus", ""), ("ManCity", "Real"), ("Atlético", "Shakhtar"), ("Eindhoven", "Lille"), ("Monaco", "Stuttgart")]
+
+---
+
+Tirage pour l'équipe : Shakhtar
+Adversaires possibles du pot 1 : [("Leipzig", "Inter")]
+Adversaires possibles du pot 2 : [("Juventus", "Brugge")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Sporting"), ("Feyenoord", "Eindhoven"), ("Feyenoord", "Salzburg"), ("Feyenoord", "Crvena"), ("Feyenoord", "YB"), ("Feyenoord", "Celtic"), ("Sporting", "Eindhoven"), ("Sporting", "Salzburg"), ("Sporting", "Crvena"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("Dinamo", "Sporting"), ("Dinamo", "Eindhoven"), ("Dinamo", "Salzburg"), ("Dinamo", "Crvena"), ("Dinamo", "YB"), ("Dinamo", "Celtic"), ("Salzburg", "Sporting"), ("Salzburg", "Eindhoven"), ("Salzburg", "Crvena"), ("Salzburg", "YB"), ("Salzburg", "Celtic"), ("Lille", "Sporting"), ("Lille", "Eindhoven"), ("Lille", "Salzburg"), ("Lille", "Crvena"), ("Lille", "YB"), ("Lille", "Celtic"), ("YB", "Sporting"), ("YB", "Eindhoven"), ("YB", "Salzburg"), ("YB", "Crvena"), ("YB", "Celtic")]
+Adversaires possibles du pot 4 : [("Bratislava", "Monaco"), ("Bratislava", "Sparta"), ("Bratislava", "Girona"), ("Bratislava", "Sturm Graz"), ("Bratislava", "Brest"), ("Girona", "Monaco"), ("Girona", "Sparta"), ("Girona", "Sturm Graz"), ("Girona", "Brest"), ("Stuttgart", "Monaco"), ("Stuttgart", "Sparta"), ("Stuttgart", "Girona"), ("Stuttgart", "Sturm Graz"), ("Stuttgart", "Brest"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Sparta"), ("Sturm Graz", "Girona"), ("Sturm Graz", "Brest"), ("Brest", "Monaco"), ("Brest", "Sparta"), ("Brest", "Girona"), ("Brest", "Sturm Graz")]
+[("Shakhtar", ""), ("Leipzig", "Inter"), ("Juventus", "Brugge"), ("Salzburg", "Sporting"), ("Stuttgart", "Girona")]
+
+---
+
+Tirage pour l'équipe : Atlético
+Adversaires possibles du pot 1 : [("Liverpool", "Leipzig")]
+Adversaires possibles du pot 2 : [("Milan", "Juventus")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Eindhoven"), ("Feyenoord", "Salzburg"), ("Feyenoord", "Crvena"), ("Feyenoord", "YB"), ("Feyenoord", "Celtic"), ("Sporting", "Eindhoven"), ("Sporting", "Salzburg"), ("Sporting", "Crvena"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("Dinamo", "Eindhoven"), ("Dinamo", "Salzburg"), ("Dinamo", "Crvena"), ("Dinamo", "YB"), ("Dinamo", "Celtic"), ("Lille", "Eindhoven"), ("Lille", "Salzburg"), ("Lille", "Crvena"), ("Lille", "YB"), ("Lille", "Celtic"), ("YB", "Eindhoven"), ("YB", "Salzburg"), ("YB", "Crvena"), ("YB", "Celtic")]
+Adversaires possibles du pot 4 : [("Bratislava", "Monaco"), ("Bratislava", "Sparta"), ("Bratislava", "Sturm Graz"), ("Bratislava", "Brest"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Sparta"), ("Sturm Graz", "Brest"), ("Brest", "Monaco"), ("Brest", "Sparta"), ("Brest", "Sturm Graz")]
+[("Atlético", ""), ("Liverpool", "Leipzig"), ("Milan", "Juventus"), ("Dinamo", "Eindhoven"), ("Bratislava", "Sturm Graz")]
+
+---
+
+Tirage pour l'équipe : Milan
+Adversaires possibles du pot 1 : [("Barcelona", "Dortmund")]
+Adversaires possibles du pot 2 : [("Benfica", "Atlético")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Salzburg"), ("Feyenoord", "Crvena"), ("Feyenoord", "YB"), ("Feyenoord", "Celtic"), ("Sporting", "Salzburg"), ("Sporting", "Crvena"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("YB", "Salzburg"), ("YB", "Crvena"), ("YB", "Celtic")]
+Adversaires possibles du pot 4 : [("Sturm Graz", "Monaco"), ("Sturm Graz", "Sparta"), ("Sturm Graz", "Brest"), ("Brest", "Monaco"), ("Brest", "Sparta")]
+[("Milan", ""), ("Barcelona", "Dortmund"), ("Benfica", "Atlético"), ("Sporting", "Celtic"), ("Brest", "Monaco")]
+
+---
+
+Tirage pour l'équipe : Benfica
+Adversaires possibles du pot 1 : [("Dortmund", "Liverpool")]
+Adversaires possibles du pot 2 : [("Arsenal", "Milan")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Salzburg"), ("Feyenoord", "Crvena"), ("Feyenoord", "YB"), ("Lille", "Salzburg"), ("Lille", "Crvena"), ("Lille", "YB"), ("YB", "Salzburg"), ("YB", "Crvena")]
+Adversaires possibles du pot 4 : [("Bologna", "Sparta"), ("Bologna", "Brest"), ("Sturm Graz", "Bologna")]
+[("Benfica", ""), ("Dortmund", "Liverpool"), ("Arsenal", "Milan"), ("YB", "Crvena"), ("Sturm Graz", "Bologna")]
+
+---
+
+Tirage pour l'équipe : Leverkusen
+Adversaires possibles du pot 1 : [("Real", "ManCity")]
+Adversaires possibles du pot 2 : [("Brugge", "Atalanta")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Salzburg"), ("Feyenoord", "YB"), ("Lille", "Salzburg"), ("Lille", "YB")]
+Adversaires possibles du pot 4 : [("Bologna", "Sparta"), ("Bologna", "Brest")]
+[("Leverkusen", ""), ("Real", "ManCity"), ("Brugge", "Atalanta"), ("Feyenoord", "Salzburg"), ("Bologna", "Brest")]
+
+---
+
+Tirage pour l'équipe : Arsenal
+Adversaires possibles du pot 1 : [("Inter", "Bayern")]
+Adversaires possibles du pot 2 : [("Atalanta", "Benfica")]
+Adversaires possibles du pot 3 : [("Lille", "YB")]
+Adversaires possibles du pot 4 : [("Girona", "Sparta")]
+[("Arsenal", ""), ("Inter", "Bayern"), ("Atalanta", "Benfica"), ("Lille", "YB"), ("Girona", "Sparta")]
+
+---
+
+
+
+
+Tirage pour l'équipe : Lille
+Adversaires possibles du pot 1 : [("Liverpool", "Inter")]
+Adversaires possibles du pot 2 : [("Juventus", "Arsenal")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Sporting"), ("Feyenoord", "Eindhoven"), ("Feyenoord", "Dinamo"), ("Feyenoord", "Salzburg"), ("Feyenoord", "Crvena"), ("Feyenoord", "YB"), ("Feyenoord", "Celtic"), ("Sporting", "Feyenoord"), ("Sporting", "Eindhoven"), ("Sporting", "Dinamo"), ("Sporting", "Salzburg"), ("Sporting", "Crvena"), ("Sporting", "YB"), ("Sporting", "Celtic"), ("Eindhoven", "Feyenoord"), ("Eindhoven", "Sporting"), ("Eindhoven", "Dinamo"), ("Eindhoven", "Salzburg"), ("Eindhoven", "Crvena"), ("Eindhoven", "YB"), ("Eindhoven", "Celtic"), ("Dinamo", "Feyenoord"), ("Dinamo", "Sporting"), ("Dinamo", "Eindhoven"), ("Dinamo", "Salzburg"), ("Dinamo", "Crvena"), ("Dinamo", "YB"), ("Dinamo", "Celtic"), ("Salzburg", "Feyenoord"), ("Salzburg", "Sporting"), ("Salzburg", "Eindhoven"), ("Salzburg", "Dinamo"), ("Salzburg", "Crvena"), ("Salzburg", "YB"), ("Salzburg", "Celtic"), ("Crvena", "Feyenoord"), ("Crvena", "Sporting"), ("Crvena", "Eindhoven"), ("Crvena", "Dinamo"), ("Crvena", "Salzburg"), ("Crvena", "YB"), ("Crvena", "Celtic"), ("YB", "Feyenoord"), ("YB", "Sporting"), ("YB", "Eindhoven"), ("YB", "Dinamo"), ("YB", "Salzburg"), ("YB", "Crvena"), ("YB", "Celtic"), ("Celtic", "Feyenoord"), ("Celtic", "Sporting"), ("Celtic", "Eindhoven"), ("Celtic", "Dinamo"), ("Celtic", "Salzburg"), ("Celtic", "Crvena"), ("Celtic", "YB")]
+Adversaires possibles du pot 4 : [("Bratislava", "Sparta"), ("Bratislava", "Girona"), ("Bratislava", "Stuttgart"), ("Bratislava", "Sturm Graz"), ("Sparta", "Bratislava"), ("Sparta", "Girona"), ("Sparta", "Stuttgart"), ("Sparta", "Sturm Graz"), ("Girona", "Bratislava"), ("Girona", "Sparta"), ("Girona", "Stuttgart"), ("Girona", "Sturm Graz"), ("Stuttgart", "Bratislava"), ("Stuttgart", "Sparta"), ("Stuttgart", "Girona"), ("Stuttgart", "Sturm Graz"), ("Sturm Graz", "Bratislava"), ("Sturm Graz", "Sparta"), ("Sturm Graz", "Girona"), ("Sturm Graz", "Stuttgart")]
+[("Lille", ""), ("Liverpool", "Inter"), ("Juventus", "Arsenal"), ("YB", "Eindhoven"), ("Bratislava", "Sparta")]
+
+---
+
+Tirage pour l'équipe : YB
+Adversaires possibles du pot 1 : [("ManCity", "Real")]
+Adversaires possibles du pot 2 : [("Arsenal", "Benfica")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Lille"), ("Sporting", "Lille"), ("Eindhoven", "Lille"), ("Dinamo", "Lille"), ("Salzburg", "Lille"), ("Crvena", "Lille"), ("Celtic", "Lille")]
+Adversaires possibles du pot 4 : [("Monaco", "Bratislava"), ("Monaco", "Bologna"), ("Monaco", "Girona"), ("Monaco", "Stuttgart"), ("Monaco", "Sturm Graz"), ("Sparta", "Bratislava"), ("Sparta", "Monaco"), ("Sparta", "Bologna"), ("Sparta", "Girona"), ("Sparta", "Stuttgart"), ("Sparta", "Sturm Graz"), ("Sparta", "Brest"), ("Bologna", "Bratislava"), ("Bologna", "Monaco"), ("Bologna", "Girona"), ("Bologna", "Stuttgart"), ("Bologna", "Sturm Graz"), ("Bologna", "Brest"), ("Girona", "Bratislava"), ("Girona", "Monaco"), ("Girona", "Bologna"), ("Girona", "Stuttgart"), ("Girona", "Sturm Graz"), ("Girona", "Brest"), ("Stuttgart", "Bratislava"), ("Stuttgart", "Monaco"), ("Stuttgart", "Bologna"), ("Stuttgart", "Girona"), ("Stuttgart", "Sturm Graz"), ("Stuttgart", "Brest"), ("Sturm Graz", "Bratislava"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Bologna"), ("Sturm Graz", "Girona"), ("Sturm Graz", "Stuttgart"), ("Sturm Graz", "Brest"), ("Brest", "Bratislava"), ("Brest", "Bologna"), ("Brest", "Girona"), ("Brest", "Stuttgart"), ("Brest", "Sturm Graz")]
+[("YB", ""), ("ManCity", "Real"), ("Arsenal", "Benfica"), ("Celtic", "Lille"), ("Sparta", "Brest")]
+
+---
+
+Tirage pour l'équipe : Eindhoven
+Adversaires possibles du pot 1 : [("Leipzig", "Bayern")]
+Adversaires possibles du pot 2 : [("Atlético", "Juventus")]
+Adversaires possibles du pot 3 : [("Lille", "Sporting"), ("Lille", "Dinamo"), ("Lille", "Salzburg"), ("Lille", "Crvena"), ("Lille", "Celtic")]
+Adversaires possibles du pot 4 : [("Monaco", "Bratislava"), ("Monaco", "Aston Villa"), ("Monaco", "Bologna"), ("Monaco", "Girona"), ("Monaco", "Sturm Graz"), ("Aston Villa", "Bratislava"), ("Aston Villa", "Monaco"), ("Aston Villa", "Bologna"), ("Aston Villa", "Girona"), ("Aston Villa", "Sturm Graz"), ("Bologna", "Bratislava"), ("Bologna", "Monaco"), ("Bologna", "Aston Villa"), ("Bologna", "Girona"), ("Bologna", "Sturm Graz"), ("Girona", "Bratislava"), ("Girona", "Monaco"), ("Girona", "Aston Villa"), ("Girona", "Bologna"), ("Girona", "Sturm Graz"), ("Sturm Graz", "Bratislava"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Aston Villa"), ("Sturm Graz", "Bologna"), ("Sturm Graz", "Girona"), ("Brest", "Bratislava"), ("Brest", "Aston Villa"), ("Brest", "Bologna"), ("Brest", "Girona"), ("Brest", "Sturm Graz")]
+[("Eindhoven", ""), ("Leipzig", "Bayern"), ("Atlético", "Juventus"), ("Lille", "Sporting"), ("Bologna", "Girona")]
+
+---
+
+Tirage pour l'équipe : Salzburg
+Adversaires possibles du pot 1 : [("Real", "Dortmund")]
+Adversaires possibles du pot 2 : [("Leverkusen", "Shakhtar")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Dinamo"), ("Feyenoord", "Crvena"), ("Feyenoord", "Celtic"), ("Sporting", "Feyenoord"), ("Sporting", "Dinamo"), ("Sporting", "Crvena"), ("Sporting", "Celtic"), ("Dinamo", "Feyenoord"), ("Dinamo", "Crvena"), ("Dinamo", "Celtic"), ("Crvena", "Feyenoord"), ("Crvena", "Dinamo"), ("Crvena", "Celtic")]
+Adversaires possibles du pot 4 : [("Monaco", "Bratislava"), ("Monaco", "Aston Villa"), ("Monaco", "Bologna"), ("Aston Villa", "Bratislava"), ("Aston Villa", "Monaco"), ("Aston Villa", "Bologna"), ("Girona", "Bratislava"), ("Girona", "Monaco"), ("Girona", "Aston Villa"), ("Girona", "Bologna"), ("Brest", "Bratislava"), ("Brest", "Monaco"), ("Brest", "Aston Villa"), ("Brest", "Bologna")]
+[("Salzburg", ""), ("Real", "Dortmund"), ("Leverkusen", "Shakhtar"), ("Dinamo", "Crvena"), ("Girona", "Bologna")]
+
+---
+
+Tirage pour l'équipe : Crvena
+Adversaires possibles du pot 1 : [("Inter", "Leipzig")]
+Adversaires possibles du pot 2 : [("Benfica", "Brugge")]
+Adversaires possibles du pot 3 : [("Salzburg", "Feyenoord"), ("Salzburg", "Dinamo"), ("Salzburg", "Celtic")]
+Adversaires possibles du pot 4 : [("Monaco", "Bratislava"), ("Monaco", "Aston Villa"), ("Monaco", "Stuttgart"), ("Monaco", "Sturm Graz"), ("Aston Villa", "Bratislava"), ("Aston Villa", "Monaco"), ("Aston Villa", "Stuttgart"), ("Aston Villa", "Sturm Graz"), ("Stuttgart", "Bratislava"), ("Stuttgart", "Monaco"), ("Stuttgart", "Aston Villa"), ("Stuttgart", "Sturm Graz"), ("Sturm Graz", "Bratislava"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Aston Villa"), ("Sturm Graz", "Stuttgart"), ("Brest", "Bratislava"), ("Brest", "Monaco"), ("Brest", "Aston Villa"), ("Brest", "Stuttgart"), ("Brest", "Sturm Graz")]
+[("Crvena", ""), ("Inter", "Leipzig"), ("Benfica", "Brugge"), ("Salzburg", "Feyenoord"), ("Aston Villa", "Bratislava")]
+
+---
+
+Tirage pour l'équipe : Celtic
+Adversaires possibles du pot 1 : [("PSG", "Liverpool")]
+Adversaires possibles du pot 2 : [("Milan", "Atalanta")]
+Adversaires possibles du pot 3 : [("Feyenoord", "YB"), ("Sporting", "YB")]
+Adversaires possibles du pot 4 : [("Monaco", "Aston Villa"), ("Monaco", "Stuttgart"), ("Monaco", "Sturm Graz"), ("Stuttgart", "Monaco"), ("Stuttgart", "Aston Villa"), ("Stuttgart", "Sturm Graz"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Aston Villa"), ("Sturm Graz", "Stuttgart"), ("Brest", "Aston Villa"), ("Brest", "Stuttgart"), ("Brest", "Sturm Graz")]
+[("Celtic", ""), ("PSG", "Liverpool"), ("Milan", "Atalanta"), ("Sporting", "YB"), ("Sturm Graz", "Aston Villa")]
+
+---
+
+Tirage pour l'équipe : Feyenoord
+Adversaires possibles du pot 1 : [("Dortmund", "Barcelona")]
+Adversaires possibles du pot 2 : [("Atalanta", "Leverkusen")]
+Adversaires possibles du pot 3 : [("Crvena", "Dinamo")]
+Adversaires possibles du pot 4 : [("Monaco", "Sturm Graz"), ("Brest", "Monaco"), ("Brest", "Sturm Graz")]
+[("Feyenoord", ""), ("Dortmund", "Barcelona"), ("Atalanta", "Leverkusen"), ("Crvena", "Dinamo"), ("Brest", "Sturm Graz")]
+
+---
+
+Tirage pour l'équipe : Sporting
+Adversaires possibles du pot 1 : [("Barcelona", "PSG")]
+Adversaires possibles du pot 2 : [("Shakhtar", "Milan")]
+Adversaires possibles du pot 3 : [("Eindhoven", "Celtic")]
+Adversaires possibles du pot 4 : [("Monaco", "Stuttgart"), ("Stuttgart", "Monaco")]
+[("Sporting", ""), ("Barcelona", "PSG"), ("Shakhtar", "Milan"), ("Eindhoven", "Celtic"), ("Monaco", "Stuttgart")]
+
+---
+
+Tirage pour l'équipe : Dinamo
+Adversaires possibles du pot 1 : [("Bayern", "ManCity")]
+Adversaires possibles du pot 2 : [("Brugge", "Atlético")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Salzburg")]
+Adversaires possibles du pot 4 : [("Stuttgart", "Monaco")]
+[("Dinamo", ""), ("Bayern", "ManCity"), ("Brugge", "Atlético"), ("Feyenoord", "Salzburg"), ("Stuttgart", "Monaco")]
+
+---
+
+
+
+
+Tirage pour l'équipe : Bratislava
+Adversaires possibles du pot 1 : [("Leipzig", "Barcelona")]
+Adversaires possibles du pot 2 : [("Atalanta", "Atlético")]
+Adversaires possibles du pot 3 : [("Crvena", "Lille")]
+Adversaires possibles du pot 4 : [("Monaco", "Sparta"), ("Monaco", "Aston Villa"), ("Monaco", "Bologna"), ("Monaco", "Stuttgart"), ("Monaco", "Sturm Graz"), ("Sparta", "Monaco"), ("Sparta", "Aston Villa"), ("Sparta", "Bologna"), ("Sparta", "Stuttgart"), ("Sparta", "Sturm Graz"), ("Sparta", "Brest"), ("Aston Villa", "Monaco"), ("Aston Villa", "Sparta"), ("Aston Villa", "Bologna"), ("Aston Villa", "Stuttgart"), ("Aston Villa", "Sturm Graz"), ("Aston Villa", "Brest"), ("Bologna", "Monaco"), ("Bologna", "Sparta"), ("Bologna", "Aston Villa"), ("Bologna", "Stuttgart"), ("Bologna", "Sturm Graz"), ("Bologna", "Brest"), ("Stuttgart", "Monaco"), ("Stuttgart", "Sparta"), ("Stuttgart", "Aston Villa"), ("Stuttgart", "Bologna"), ("Stuttgart", "Sturm Graz"), ("Stuttgart", "Brest"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Sparta"), ("Sturm Graz", "Aston Villa"), ("Sturm Graz", "Bologna"), ("Sturm Graz", "Stuttgart"), ("Sturm Graz", "Brest"), ("Brest", "Sparta"), ("Brest", "Aston Villa"), ("Brest", "Bologna"), ("Brest", "Stuttgart"), ("Brest", "Sturm Graz")]
+[("Bratislava", ""), ("Leipzig", "Barcelona"), ("Atalanta", "Atlético"), ("Crvena", "Lille"), ("Brest", "Stuttgart")]
+
+---
+
+Tirage pour l'équipe : Girona
+Adversaires possibles du pot 1 : [("PSG", "Leipzig")]
+Adversaires possibles du pot 2 : [("Shakhtar", "Arsenal")]
+Adversaires possibles du pot 3 : [("Eindhoven", "Salzburg")]
+Adversaires possibles du pot 4 : [("Monaco", "Sparta"), ("Monaco", "Aston Villa"), ("Monaco", "Bologna"), ("Monaco", "Sturm Graz"), ("Sparta", "Monaco"), ("Sparta", "Aston Villa"), ("Sparta", "Bologna"), ("Sparta", "Sturm Graz"), ("Sparta", "Brest"), ("Aston Villa", "Monaco"), ("Aston Villa", "Sparta"), ("Aston Villa", "Bologna"), ("Aston Villa", "Sturm Graz"), ("Aston Villa", "Brest"), ("Bologna", "Monaco"), ("Bologna", "Sparta"), ("Bologna", "Aston Villa"), ("Bologna", "Sturm Graz"), ("Bologna", "Brest"), ("Stuttgart", "Monaco"), ("Stuttgart", "Sparta"), ("Stuttgart", "Aston Villa"), ("Stuttgart", "Bologna"), ("Stuttgart", "Sturm Graz"), ("Stuttgart", "Brest"), ("Sturm Graz", "Monaco"), ("Sturm Graz", "Sparta"), ("Sturm Graz", "Aston Villa"), ("Sturm Graz", "Bologna"), ("Sturm Graz", "Brest")]
+[("Girona", ""), ("PSG", "Leipzig"), ("Shakhtar", "Arsenal"), ("Eindhoven", "Salzburg"), ("Sturm Graz", "Monaco")]
+
+---
+
+Tirage pour l'équipe : Sparta
+Adversaires possibles du pot 1 : [("Real", "Inter")]
+Adversaires possibles du pot 2 : [("Arsenal", "Brugge")]
+Adversaires possibles du pot 3 : [("Lille", "YB")]
+Adversaires possibles du pot 4 : [("Monaco", "Aston Villa"), ("Monaco", "Bologna"), ("Monaco", "Sturm Graz"), ("Aston Villa", "Brest"), ("Bologna", "Aston Villa"), ("Bologna", "Sturm Graz"), ("Bologna", "Brest"), ("Stuttgart", "Bologna"), ("Stuttgart", "Brest")]
+[("Sparta", ""), ("Real", "Inter"), ("Arsenal", "Brugge"), ("Lille", "YB"), ("Bologna", "Sturm Graz")]
+
+---
+
+Tirage pour l'équipe : Monaco
+Adversaires possibles du pot 1 : [("Dortmund", "Liverpool")]
+Adversaires possibles du pot 2 : [("Milan", "Juventus")]
+Adversaires possibles du pot 3 : [("Dinamo", "Sporting")]
+Adversaires possibles du pot 4 : [("Girona", "Aston Villa")]
+[("Monaco", ""), ("Dortmund", "Liverpool"), ("Milan", "Juventus"), ("Dinamo", "Sporting"), ("Girona", "Aston Villa")]
+
+---
+
+Tirage pour l'équipe : Aston Villa
+Adversaires possibles du pot 1 : [("Bayern", "Dortmund")]
+Adversaires possibles du pot 2 : [("Brugge", "Atalanta")]
+Adversaires possibles du pot 3 : [("Celtic", "Crvena")]
+Adversaires possibles du pot 4 : [("Monaco", "Brest")]
+[("Aston Villa", ""), ("Bayern", "Dortmund"), ("Brugge", "Atalanta"), ("Celtic", "Crvena"), ("Monaco", "Brest")]
+
+---
+
+Tirage pour l'équipe : Sturm Graz
+Adversaires possibles du pot 1 : [("Liverpool", "ManCity")]
+Adversaires possibles du pot 2 : [("Atlético", "Benfica")]
+Adversaires possibles du pot 3 : [("Feyenoord", "Celtic")]
+Adversaires possibles du pot 4 : [("Sparta", "Girona")]
+[("Sturm Graz", ""), ("Liverpool", "ManCity"), ("Atlético", "Benfica"), ("Feyenoord", "Celtic"), ("Sparta", "Girona")]
+
+---
+
+Tirage pour l'équipe : Stuttgart
+Adversaires possibles du pot 1 : [("Barcelona", "PSG")]
+Adversaires possibles du pot 2 : [("Juventus", "Shakhtar")]
+Adversaires possibles du pot 3 : [("Sporting", "Dinamo")]
+Adversaires possibles du pot 4 : [("Bratislava", "Bologna")]
+[("Stuttgart", ""), ("Barcelona", "PSG"), ("Juventus", "Shakhtar"), ("Sporting", "Dinamo"), ("Bratislava", "Bologna")]
+
+---
+
+Tirage pour l'équipe : Bologna
+Adversaires possibles du pot 1 : [("ManCity", "Real")]
+Adversaires possibles du pot 2 : [("Benfica", "Leverkusen")]
+Adversaires possibles du pot 3 : [("Salzburg", "Eindhoven")]
+Adversaires possibles du pot 4 : [("Stuttgart", "Sparta")]
+[("Bologna", ""), ("ManCity", "Real"), ("Benfica", "Leverkusen"), ("Salzburg", "Eindhoven"), ("Stuttgart", "Sparta")]
+
+---
+
+Tirage pour l'équipe : Brest
+Adversaires possibles du pot 1 : [("Inter", "Bayern")]
+Adversaires possibles du pot 2 : [("Leverkusen", "Milan")]
+Adversaires possibles du pot 3 : [("YB", "Feyenoord")]
+Adversaires possibles du pot 4 : [("Aston Villa", "Bratislava")]
+[("Brest", ""), ("Inter", "Bayern"), ("Leverkusen", "Milan"), ("YB", "Feyenoord"), ("Aston Villa", "Bratislava")]
+
+---
+
+
+
+

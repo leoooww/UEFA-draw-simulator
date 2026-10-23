@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+/* Réinitialisation globale */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Style du corps de la page */
+  body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #080e3a;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  /* Style de l'élément racine Angular */
+  app-root {
+    display: block;
+    min-height: 100vh;
+    background-color: #080e3a;
+  }

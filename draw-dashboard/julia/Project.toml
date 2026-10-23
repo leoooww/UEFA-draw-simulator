@@ -1,0 +1,23 @@
+name = "DrawService"
+uuid = "09e80bd7-069a-4caa-9e55-be918c93d407"
+authors = ["TDLOG"]
+version = "0.1.0"
+
+[deps]
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
+JuMP = "4076af6c-e467-56ae-b986-b466b2749572"
+MathOptInterface = "b8f27783-ece8-5eb3-8dc8-9495eed66fee"
+Oxygen = "df9a0d86-3283-4920-82dc-4555fc0d1d8b"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+SCIP = "82193955-e24f-5292-bf16-6f2c5261a85f"
+
+[compat]
+julia = "1.10"
+HTTP = "2.12.1"
+JSON3 = "1.14.3"
+JuMP = "1.32.1"
+MathOptInterface = "1.54.0"
+Oxygen = "1.11.0"
+Random = "1.11.0"
+SCIP = "0.12.8"
