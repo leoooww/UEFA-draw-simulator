@@ -141,7 +141,7 @@ def team_schedule(draw: dict, club: str) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def render_animated_results_table(df: pd.DataFrame) -> str:
+def render_animated_results_table(df: pd.DataFrame, nonce: int = 0, animate: bool = True) -> str:
     """Render the results table with a top-left to bottom-right fading green wave animation covering the whole cell."""
     cols = list(df.columns)
     team_cols = {
@@ -152,33 +152,46 @@ def render_animated_results_table(df: pd.DataFrame) -> str:
         "Home vs D", "Away at D",
     }
 
-    html = [
-        """<style>
-@keyframes cellFadeGreenSweep {
-  0% {
+    style_block = ""
+    if animate:
+        style_block = f"""<style>
+@keyframes cellFadeGreenSweep_{nonce} {{
+  0% {{
     opacity: 0;
     transform: scale(0.96) translateY(2px);
     background-color: rgba(34, 197, 94, 0.55);
     box-shadow: inset 0 0 12px rgba(34, 197, 94, 0.45);
     color: #ffffff;
-  }
-  30% {
+  }}
+  30% {{
     opacity: 1;
     transform: scale(1) translateY(0);
     background-color: rgba(34, 197, 94, 0.35);
     box-shadow: inset 0 0 8px rgba(34, 197, 94, 0.3);
     color: #15803d;
-  }
-  100% {
+  }}
+  100% {{
     opacity: 1;
     transform: scale(1) translateY(0);
     background-color: transparent;
     box-shadow: none;
     color: inherit;
-  }
-}
+  }}
+}}
 
-.table-wrap {
+.draw-table-{nonce} td.anim-cell-{nonce} {{
+  will-change: transform, opacity, background-color;
+  animation-name: cellFadeGreenSweep_{nonce};
+  animation-duration: 0.85s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}}
+</style>
+"""
+
+    html = [
+        f"""{style_block}<style>
+.table-wrap-{nonce} {{
   overflow-x: auto;
   overflow-y: auto;
   max-height: 480px;
@@ -186,18 +199,18 @@ def render_animated_results_table(df: pd.DataFrame) -> str:
   border-radius: 8px;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
-}
+}}
 
-.draw-table {
+.draw-table-{nonce} {{
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   font-size: 0.85rem;
   font-family: inherit;
   text-align: left;
-}
+}}
 
-.draw-table th {
+.draw-table-{nonce} th {{
   position: sticky;
   top: 0;
   z-index: 2;
@@ -207,38 +220,33 @@ def render_animated_results_table(df: pd.DataFrame) -> str:
   font-weight: 600;
   border-bottom: 2px solid rgba(128, 128, 128, 0.3);
   white-space: nowrap;
-}
+}}
 
-.draw-table td {
+.draw-table-{nonce} td {{
   padding: 6px 10px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.12);
   white-space: nowrap;
-  will-change: transform, opacity, background-color;
-  animation-name: cellFadeGreenSweep;
-  animation-duration: 0.85s;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  animation-fill-mode: both;
-}
+}}
 
-.draw-table tr:hover td {
+.draw-table-{nonce} tr:hover td {{
   background-color: rgba(128, 128, 128, 0.08);
-}
+}}
 
-.team-name {
+.team-name {{
   font-weight: 600;
-}
+}}
 
-.pot-pill {
+.pot-pill {{
   display: inline-block;
   padding: 1px 6px;
   border-radius: 3px;
   font-size: 0.75rem;
   font-weight: 600;
   color: #111827;
-}
+}}
 </style>
-<div class="table-wrap">
-<table class="draw-table">
+<div class="table-wrap-{nonce}">
+<table class="draw-table-{nonce}">
   <thead>
     <tr>
 """
@@ -259,7 +267,11 @@ def render_animated_results_table(df: pd.DataFrame) -> str:
                 content = f'<span class="pot-pill" style="background-color: {pot_color};">Pot {val}</span>'
             else:
                 content = f"{val}"
-            html.append(f'      <td style="animation-delay: {delay}s;">{content}</td>\n')
+
+            if animate:
+                html.append(f'      <td class="anim-cell-{nonce}" style="animation-delay: {delay}s;">{content}</td>\n')
+            else:
+                html.append(f'      <td>{content}</td>\n')
         html.append("    </tr>\n")
 
     html.append("  </tbody>\n</table>\n</div>\n")
@@ -320,6 +332,8 @@ backend_ready = bool(health and health.get("ready"))
 
 st.session_state.setdefault("result", None)
 st.session_state.setdefault("source_label", "")
+st.session_state.setdefault("draw_nonce", 0)
+st.session_state.setdefault("just_drawn", False)
 
 # ----------------------------------------------------------------------------- Sidebar
 with st.sidebar:
@@ -387,6 +401,8 @@ with st.sidebar:
                 key = f"{league_key}_{selected_seed}"
                 if key in precomputed_draws:
                     st.session_state["result"] = precomputed_draws[key]
+                    st.session_state["draw_nonce"] = st.session_state.get("draw_nonce", 0) + 1
+                    st.session_state["just_drawn"] = True
                     st.session_state["source_label"] = (
                         f"Pre-computed draw (seed {selected_seed}, true compute time: "
                         f"{precomputed_draws[key]['seconds']:.2f} s)"
@@ -397,6 +413,8 @@ with st.sidebar:
             if draw_multi_btn:
                 if multi_key in precomputed_multi:
                     st.session_state["result"] = precomputed_multi[multi_key]
+                    st.session_state["draw_nonce"] = st.session_state.get("draw_nonce", 0) + 1
+                    st.session_state["just_drawn"] = True
                     st.session_state["source_label"] = (
                         f"Pre-computed 10-draw sample (seed 2024, true compute time: "
                         f"{precomputed_multi[multi_key]['seconds']:.2f} s)"
@@ -440,6 +458,8 @@ with st.sidebar:
                 with st.spinner("Solving draw with JuMP and SCIP..."):
                     res = fetch_live_draw(live_league, live_order, live_selection, live_n, actual_seed)
                 st.session_state["result"] = res
+                st.session_state["draw_nonce"] = st.session_state.get("draw_nonce", 0) + 1
+                st.session_state["just_drawn"] = True
                 st.session_state["source_label"] = (
                     f"Live solver result (seed {actual_seed}, compute time: {res['seconds']:.2f} s)"
                 )
@@ -499,7 +519,10 @@ with tab_result:
         st.error("Rule violations: " + "; ".join(draw["violations"]))
 
     df = teams_frame(draw)
-    st.markdown(render_animated_results_table(df), unsafe_allow_html=True)
+    should_animate = st.session_state.get("just_drawn", False)
+    nonce = st.session_state.get("draw_nonce", 0)
+    st.markdown(render_animated_results_table(df, nonce=nonce, animate=should_animate), unsafe_allow_html=True)
+    st.session_state["just_drawn"] = False
     c1, c2 = st.columns([1, 1])
     c1.download_button(
         "Download fixtures (CSV)",

@@ -4,7 +4,7 @@
 
 This project simulates the UEFA Champions League single-league phase draw, solving scheduling and nationality constraints using Mixed-Integer Linear Programming (MILP).
 
-The original draw simulation algorithm is based on: [https://github.com/Jeerhz/UEFA-NEW-FORMAT](https://github.com/Jeerhz/UEFA-NEW-FORMAT).
+The original draw simulation algorithm is based on: [https://github.com/JulienGuyon/UEFA-league-phase-draw](https://github.com/JulienGuyon/UEFA-league-phase-draw).
 
 ---
 

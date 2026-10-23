@@ -43,6 +43,29 @@ def test_click_draw_renders_native_animated_table():
     assert len(at.download_button) >= 2
 
 
+def test_subsequent_navigation_has_no_animation_and_new_draw_reanimates():
+    at = _boot()
+    # 1. Click Draw for Champions League
+    draw_btn = next(b for b in at.sidebar.button if b.label == "Draw")
+    draw_btn.click().run()
+    assert any("cellFadeGreenSweep_1" in m.value for m in at.markdown)
+
+    # 2. Select another club in Results tab without clicking Draw -> should NOT animate
+    club_select = next(s for s in at.selectbox if s.key == "club")
+    club_select.select_index(1).run()
+    assert not at.exception, at.exception
+    # When not just drawn, table rendered statically without cellFadeGreenSweep
+    assert not any("cellFadeGreenSweep" in m.value for m in at.markdown)
+
+    # 3. Switch league to Europa League and click Draw -> animation must replay with new nonce (cellFadeGreenSweep_2)
+    league_select = next(s for s in at.sidebar.selectbox if s.key == "pre_league")
+    league_select.select_index(1).run()
+    draw_btn = next(b for b in at.sidebar.button if b.label == "Draw")
+    draw_btn.click().run()
+    assert not at.exception, at.exception
+    assert any("cellFadeGreenSweep_2" in m.value for m in at.markdown)
+
+
 def test_10_draw_sample_aggregation():
     at = _boot()
     # Select 10-draw sample radio in sidebar
