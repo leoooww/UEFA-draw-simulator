@@ -90,3 +90,12 @@ def test_live_mode_when_available():
         mode_radio.set_value("Live Julia solver").run()
         assert not at.exception, at.exception
         assert len(at.sidebar.button) >= 1
+
+
+def test_club_logos_rendered():
+    at = _boot()
+    draw_btn = next(b for b in at.sidebar.button if b.label == "Draw")
+    draw_btn.click().run()
+    assert not at.exception, at.exception
+    # Verify table and cards contain image data URLs for clubs
+    assert any("data:image/png;base64" in m.value for m in at.markdown)

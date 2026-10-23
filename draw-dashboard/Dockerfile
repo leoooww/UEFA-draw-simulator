@@ -45,6 +45,8 @@ ENV PATH="/usr/local/julia/bin:${PATH}" \
 RUN useradd --create-home --uid 1000 app
 WORKDIR /app
 COPY --chown=app:app julia ./julia
+COPY --chown=app:app data ./data
+COPY --chown=app:app assets ./assets
 COPY --chown=app:app app.py start.sh ./
 RUN chmod +x start.sh
 

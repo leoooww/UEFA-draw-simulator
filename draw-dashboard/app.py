@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import json
 import os
 from pathlib import Path
@@ -30,7 +31,94 @@ DATA_DIR = Path(__file__).resolve().parent / "data"
 LEAGUES_FILE = DATA_DIR / "leagues.json"
 PRECOMPUTED_FILE = DATA_DIR / "precomputed_draws.json"
 
+CLUB_TO_LOGO = {
+    "Real": "real madrid.png",
+    "ManCity": "man city.png",
+    "Bayern": "bayern munchen.png",
+    "PSG": "psg.png",
+    "Liverpool": "liverpool.png",
+    "Inter": "inter.png",
+    "Dortmund": "dortmund.png",
+    "Leipzig": "leipzig.png",
+    "Barcelona": "barca.png",
+    "Leverkusen": "leverkusen.png",
+    "Atlético": "atleti.png",
+    "Atalanta": "atalanta.png",
+    "Juventus": "juventus.png",
+    "Benfica": "benfica.png",
+    "Arsenal": "arsenal.png",
+    "Brugge": "club brugge.png",
+    "Shakhtar": "shakhtar.png",
+    "Milan": "milan.png",
+    "Feyenoord": "feyenoord.png",
+    "Sporting": "sporting.png",
+    "Eindhoven": "psv.png",
+    "Dinamo": "gnk dinamo.png",
+    "Salzburg": "salzburg.png",
+    "Lille": "lille.png",
+    "Crvena": "crvena zvezda.png",
+    "YB": "YB.png",
+    "Celtic": "celtic.png",
+    "Bratislava": "bratislava.png",
+    "Monaco": "monaco.png",
+    "Sparta": "sparta praha.png",
+    "Aston Villa": "aston villa.png",
+    "Bologna": "bologna.png",
+    "Girona": "girona.png",
+    "Stuttgart": "Stuttgart.png",
+    "Sturm Graz": "sturm graz.png",
+    "Brest": "brest.png",
+}
+
+
+@st.cache_data(show_spinner=False)
+def get_club_logos_b64() -> dict[str, str]:
+    """Pre-load and cache base64 encoded logos for all clubs."""
+    here = Path(__file__).resolve().parent
+    search_dirs = [
+        here / "assets" / "logos",
+        here.parent / "logos",
+        here / "logos",
+    ]
+    logos_dir = None
+    for d in search_dirs:
+        if d.exists():
+            logos_dir = d
+            break
+
+    out = {}
+    if logos_dir:
+        for club, filename in CLUB_TO_LOGO.items():
+            file_path = logos_dir / filename
+            if file_path.exists():
+                try:
+                    with open(file_path, "rb") as f:
+                        b64 = base64.b64encode(f.read()).decode("ascii")
+                    out[club] = f"data:image/png;base64,{b64}"
+                except Exception:
+                    pass
+    return out
+
+
 st.set_page_config(page_title="UEFA Draw Simulator", layout="wide")
+
+st.markdown(
+    """<style>
+/* Prevent tab panel re-renders from re-triggering CSS animations */
+div[data-baseweb="tab-panel"][aria-hidden="true"],
+div[data-baseweb="tab-panel"][hidden],
+div[data-testid="stTabContent"][aria-hidden="true"],
+div[data-testid="stTabContent"][hidden] {
+  display: block !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  pointer-events: none !important;
+}
+</style>""",
+    unsafe_allow_html=True,
+)
 
 st.title("UEFA Draw Simulator")
 st.caption("League-phase draw simulation for 36 teams across 4 pots using Julia (JuMP and SCIP).")
@@ -141,7 +229,12 @@ def team_schedule(draw: dict, club: str) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def render_animated_results_table(df: pd.DataFrame, nonce: int = 0, animate: bool = True) -> str:
+def render_animated_results_table(
+    df: pd.DataFrame,
+    nonce: int = 0,
+    animate: bool = True,
+    logos_b64: dict[str, str] | None = None,
+) -> str:
     """Render the results table with a top-left to bottom-right fading green wave animation covering the whole cell."""
     cols = list(df.columns)
     team_cols = {
@@ -260,7 +353,15 @@ def render_animated_results_table(df: pd.DataFrame, nonce: int = 0, animate: boo
         for c, col in enumerate(cols):
             val = row[col]
             delay = round(r * 0.035 + c * 0.025, 3)
-            if col in team_cols:
+            if col == "Club":
+                logo_src = (logos_b64 or {}).get(str(val))
+                logo_img = (
+                    f'<img src="{logo_src}" width="20" height="20" style="vertical-align:middle;margin-right:8px;object-fit:contain;" alt="">'
+                    if logo_src
+                    else ""
+                )
+                content = f'{logo_img}<span class="team-name">{val}</span>'
+            elif col in team_cols:
                 content = f'<span class="team-name">{val}</span>'
             elif col == "Pot":
                 pot_color = POT_COLORS.get(str(val), "#e2e8f0")
@@ -274,7 +375,12 @@ def render_animated_results_table(df: pd.DataFrame, nonce: int = 0, animate: boo
                 html.append(f'      <td>{content}</td>\n')
         html.append("    </tr>\n")
 
-    html.append("  </tbody>\n</table>\n</div>\n")
+    cleanup_img = (
+        f'<img src="data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'></svg>" style="display:none;" onload="(function(n){{setTimeout(function(){{var els=document.querySelectorAll(\'.anim-cell-\'+n);for(var i=0;i<els.length;i++){{els[i].style.animation=\'none\';}}}},1800);}})({nonce});" onerror="(function(n){{setTimeout(function(){{var els=document.querySelectorAll(\'.anim-cell-\'+n);for(var i=0;i<els.length;i++){{els[i].style.animation=\'none\';}}}},1800);}})({nonce});">'
+        if animate
+        else ""
+    )
+    html.append(f"  </tbody>\n</table>\n{cleanup_img}</div>\n")
     return "".join(html)
 
 
@@ -326,6 +432,7 @@ leagues = get_leagues()
 catalog = get_precomputed_catalog()
 precomputed_draws = catalog.get("draws", {})
 precomputed_multi = catalog.get("multi_draws", {})
+logos_b64 = get_club_logos_b64()
 
 health = backend_health()
 backend_ready = bool(health and health.get("ready"))
@@ -521,7 +628,10 @@ with tab_result:
     df = teams_frame(draw)
     should_animate = st.session_state.get("just_drawn", False)
     nonce = st.session_state.get("draw_nonce", 0)
-    st.markdown(render_animated_results_table(df, nonce=nonce, animate=should_animate), unsafe_allow_html=True)
+    st.markdown(
+        render_animated_results_table(df, nonce=nonce, animate=should_animate, logos_b64=logos_b64),
+        unsafe_allow_html=True,
+    )
     st.session_state["just_drawn"] = False
     c1, c2 = st.columns([1, 1])
     c1.download_button(
@@ -550,9 +660,41 @@ with tab_fair:
     toughest = agg.loc[agg["elo_mean"].idxmax()]
     easiest = agg.loc[agg["elo_mean"].idxmin()]
     m1, m2, m3 = st.columns(3)
-    m1.metric("Highest schedule Elo", toughest["Club"], f"{toughest['elo_mean']:,.0f}", delta_color="off")
-    m2.metric("Lowest schedule Elo", easiest["Club"], f"{easiest['elo_mean']:,.0f}", delta_color="off")
-    m3.metric("Elo difference", f"{toughest['elo_mean'] - easiest['elo_mean']:,.0f}")
+
+    with m1:
+        st.caption("Highest schedule Elo")
+        t_club = toughest["Club"]
+        t_logo = logos_b64.get(t_club)
+        t_img = (
+            f'<img src="{t_logo}" width="24" height="24" style="vertical-align:middle;margin-right:8px;object-fit:contain;" alt="">'
+            if t_logo
+            else ""
+        )
+        st.markdown(
+            f'<div style="display:flex;align-items:center;margin-top:-4px;margin-bottom:4px;">'
+            f'{t_img}<span style="font-size:1.3rem;font-weight:600;">{t_club}</span>'
+            f'</div>'
+            f'<div style="font-size:1.8rem;font-weight:700;line-height:1.2;">{toughest["elo_mean"]:,.0f}</div>',
+            unsafe_allow_html=True,
+        )
+    with m2:
+        st.caption("Lowest schedule Elo")
+        e_club = easiest["Club"]
+        e_logo = logos_b64.get(e_club)
+        e_img = (
+            f'<img src="{e_logo}" width="24" height="24" style="vertical-align:middle;margin-right:8px;object-fit:contain;" alt="">'
+            if e_logo
+            else ""
+        )
+        st.markdown(
+            f'<div style="display:flex;align-items:center;margin-top:-4px;margin-bottom:4px;">'
+            f'{e_img}<span style="font-size:1.3rem;font-weight:600;">{e_club}</span>'
+            f'</div>'
+            f'<div style="font-size:1.8rem;font-weight:700;line-height:1.2;">{easiest["elo_mean"]:,.0f}</div>',
+            unsafe_allow_html=True,
+        )
+    with m3:
+        st.metric("Elo difference", f"{toughest['elo_mean'] - easiest['elo_mean']:,.0f}")
     st.plotly_chart(strength_chart(agg, "elo", "Opponent Elo Sum", show_err), width="stretch")
     st.plotly_chart(strength_chart(agg, "uefa", "Opponent UEFA Coefficient Sum", show_err), width="stretch")
 
