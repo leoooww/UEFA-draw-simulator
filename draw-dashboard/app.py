@@ -100,7 +100,7 @@ def get_club_logos_b64() -> dict[str, str]:
     return out
 
 
-st.set_page_config(page_title="UEFA Draw Simulator", layout="wide")
+st.set_page_config(page_title="2024-25 UEFA Draw Simulator", layout="wide")
 
 st.markdown(
     """<style>
@@ -120,7 +120,7 @@ div[data-testid="stTabContent"][hidden] {
     unsafe_allow_html=True,
 )
 
-st.title("UEFA Draw Simulator")
+st.title("2024-25 UEFA Draw Simulator")
 st.caption("League-phase draw simulation for 36 teams across 4 pots using Julia (JuMP and SCIP).")
 
 
