@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
+import json
 import os
 from pathlib import Path
 import random
-import shutil
 import time
 from typing import Any
 
@@ -26,13 +26,17 @@ SELECTION_LABELS = {
 }
 MAX_SEED = 2**31 - 1
 
+DATA_DIR = Path(__file__).resolve().parent / "data"
+LEAGUES_FILE = DATA_DIR / "leagues.json"
+PRECOMPUTED_FILE = DATA_DIR / "precomputed_draws.json"
+
 st.set_page_config(page_title="UEFA Draw Simulator", layout="wide")
 
 st.title("UEFA Draw Simulator")
 st.caption("League-phase draw simulation for 36 teams across 4 pots using Julia (JuMP and SCIP).")
 
 
-# ----------------------------------------------------------------------------- API client
+# ----------------------------------------------------------------------------- Data Catalog & API
 class ApiError(Exception):
     """Raised for any failure talking to the Julia service."""
 
@@ -53,68 +57,49 @@ def _call(method: str, path: str, *, timeout: float = 600, **kwargs: Any) -> Any
     return resp.json()
 
 
-@st.cache_data(ttl=600, show_spinner=False)
+def backend_health() -> dict | None:
+    try:
+        resp = requests.get(f"{API_URL}/health", timeout=1.5)
+        if resp.ok:
+            return resp.json()
+    except (requests.RequestException, ValueError):
+        pass
+    return None
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
 def get_leagues() -> dict[str, dict]:
-    return {league["key"]: league for league in _call("GET", "/api/leagues", timeout=30)}
+    """Load league configuration from pre-saved data file or live API."""
+    if LEAGUES_FILE.exists():
+        try:
+            with open(LEAGUES_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            return {league["key"]: league for league in data}
+        except Exception:
+            pass
+    return {league["key"]: league for league in _call("GET", "/api/leagues", timeout=10)}
+
+
+@st.cache_data(show_spinner=False)
+def get_precomputed_catalog() -> dict:
+    """Load pre-computed simulations with true recorded JuMP/SCIP execution times."""
+    if PRECOMPUTED_FILE.exists():
+        try:
+            with open(PRECOMPUTED_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {"draws": {}, "multi_draws": {}}
 
 
 @st.cache_data(max_entries=64, show_spinner=False)
-def get_draws(league: str, order: str, selection: str, n_draws: int, seed: int) -> dict:
-    """Cached on the full parameter set: identical inputs (incl. seed) never hit Julia twice."""
+def fetch_live_draw(league: str, order: str, selection: str, n_draws: int, seed: int) -> dict:
+    """Cached on parameter set: identical live inputs never hit Julia twice."""
     payload = {"league": league, "order": order, "selection": selection, "n_draws": n_draws, "seed": seed}
     return _call("POST", "/api/draw", json=payload)
 
 
-def backend_health() -> dict | None:
-    for timeout in (2, 4):
-        try:
-            resp = requests.get(f"{API_URL}/health", timeout=timeout)
-            if resp.ok:
-                return resp.json()
-        except (requests.RequestException, ValueError):
-            pass
-    return None
-
-
-@st.cache_resource
-def _launch_local_backend(julia_bin: str, server_file: str, project_dir: str):
-    import subprocess
-    return subprocess.Popen(
-        [julia_bin, f"--project={project_dir}", "-t", "auto", server_file],
-        cwd=project_dir,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
-
-
-def ensure_backend_health() -> dict | None:
-    health = backend_health()
-    if health is not None:
-        return health
-
-    # If the backend is local and not yet running, auto-start it
-    if "127.0.0.1" in API_URL or "localhost" in API_URL:
-        julia_bin = shutil.which("julia")
-        if not julia_bin:
-            fallback = os.path.expanduser("~/.juliaup/bin/julia")
-            if os.path.exists(fallback):
-                julia_bin = fallback
-
-        here = Path(__file__).resolve().parent
-        server_path = here / "julia" / "server.jl"
-        project_dir = here / "julia"
-        if julia_bin and server_path.exists():
-            with st.spinner("Starting Julia backend service..."):
-                _launch_local_backend(julia_bin, str(server_path), str(project_dir))
-                for _ in range(45):
-                    time.sleep(1)
-                    h = backend_health()
-                    if h is not None and h.get("ready"):
-                        return h
-    return backend_health()
-
-
-# ----------------------------------------------------------------------------- data shaping
+# ----------------------------------------------------------------------------- Data Shaping
 def teams_frame(draw: dict) -> pd.DataFrame:
     rows = []
     for t in draw["teams"]:
@@ -144,8 +129,14 @@ def team_schedule(draw: dict, club: str) -> pd.DataFrame:
         for venue, opp in (("Home", o["home_vs"]), ("Away", o["away_vs"])):
             m = meta[opp]
             rows.append(
-                {"Pot": o["pot"], "Venue": venue, "Opponent": opp, "Nationality": m["nationality"],
-                 "Elo": m["elo"], "UEFA coeff.": m["uefa"]}
+                {
+                    "Pot": o["pot"],
+                    "Venue": venue,
+                    "Opponent": opp,
+                    "Nationality": m["nationality"],
+                    "Elo": m["elo"],
+                    "UEFA coeff.": m["uefa"],
+                }
             )
     return pd.DataFrame(rows)
 
@@ -158,8 +149,10 @@ def aggregate_strength(draws: list[dict]) -> pd.DataFrame:
     ]
     df = pd.DataFrame(rows)
     out = df.groupby(["Club", "Pot"], sort=False).agg(
-        elo_mean=("elo", "mean"), elo_std=("elo", "std"),
-        uefa_mean=("uefa", "mean"), uefa_std=("uefa", "std"),
+        elo_mean=("elo", "mean"),
+        elo_std=("elo", "std"),
+        uefa_mean=("uefa", "mean"),
+        uefa_std=("uefa", "std"),
     ).reset_index()
     return out.fillna({"elo_std": 0.0, "uefa_std": 0.0})
 
@@ -169,68 +162,173 @@ def strength_chart(agg: pd.DataFrame, metric: str, title: str, show_error: bool)
     for pot, color in POT_COLORS.items():
         sub = agg[agg["Pot"] == pot]
         fig.add_bar(
-            x=sub["Club"], y=sub[f"{metric}_mean"], name=f"Pot {pot}", marker_color=color,
+            x=sub["Club"],
+            y=sub[f"{metric}_mean"],
+            name=f"Pot {pot}",
+            marker_color=color,
             error_y=dict(type="data", array=sub[f"{metric}_std"], visible=show_error),
             hovertemplate="%{x}<br>%{y:,.1f}<extra>Pot " + pot + "</extra>",
         )
     lo = agg[f"{metric}_mean"].min()
     hi = agg[f"{metric}_mean"].max()
     fig.update_layout(
-        title=title, barmode="group", height=420, margin=dict(l=10, r=10, t=50, b=10),
-        legend=dict(orientation="h", y=1.1, x=0), xaxis_tickangle=-60,
+        title=title,
+        barmode="group",
+        height=420,
+        margin=dict(l=10, r=10, t=50, b=10),
+        legend=dict(orientation="h", y=1.1, x=0),
+        xaxis_tickangle=-60,
         yaxis=dict(range=[lo - 0.15 * (hi - lo), hi + 0.08 * (hi - lo)], title=None),
     )
     return fig
 
 
-# ----------------------------------------------------------------------------- backend gate
-health = ensure_backend_health()
-if health is None:
-    st.error(f"Julia service unreachable at `{API_URL}`.")
-    st.caption("Start it with `julia --project=julia -t auto julia/server.jl` or `docker compose up`.")
-    if st.button("Retry"):
-        st.rerun()
-    st.stop()
+# ----------------------------------------------------------------------------- Setup State
+leagues = get_leagues()
+catalog = get_precomputed_catalog()
+precomputed_draws = catalog.get("draws", {})
+precomputed_multi = catalog.get("multi_draws", {})
 
-try:
-    leagues = get_leagues()
-except ApiError as exc:
-    st.error(str(exc))
-    st.stop()
+health = backend_health()
+backend_ready = bool(health and health.get("ready"))
 
-# ----------------------------------------------------------------------------- sidebar
-st.session_state.setdefault("seed", random.randint(1, MAX_SEED))
-st.session_state.setdefault("params", None)
+st.session_state.setdefault("result", None)
+st.session_state.setdefault("source_label", "")
 
+# ----------------------------------------------------------------------------- Sidebar
 with st.sidebar:
     st.header("Draw settings")
-    st.caption("Backend ready" if health.get("ready") else "Backend warming up")
-    randomize = st.checkbox("New random seed on every run", value=True)
-    with st.form("draw_form"):
-        league = st.selectbox("League", list(leagues), format_func=lambda k: leagues[k]["label"])
-        order = st.radio("Draw order", list(ORDER_LABELS), format_func=ORDER_LABELS.get,
-                         help="Pot-by-pot mirrors the official procedure; fully random shuffles teams and opponent pots.")
-        selection = st.radio("Selection algorithm", list(SELECTION_LABELS), format_func=SELECTION_LABELS.get,
-                             help="Both sample uniformly among admissible couples. Exhaustive solves every candidate "
-                                  "(slower, ~20-40s per draw) and reports how many options each step had.")
-        n_draws = st.slider("Number of draws", 1, 25, 1,
-                            help="Run multiple draws to compare schedule strength across clubs.")
-        seed_input = st.number_input("Seed", 1, MAX_SEED, st.session_state["seed"], disabled=randomize)
-        submitted = st.form_submit_button("Run draw", type="primary", width="stretch")
 
-if submitted:
-    seed = random.randint(1, MAX_SEED) if randomize else int(seed_input)
-    st.session_state["seed"] = seed
-    st.session_state["params"] = dict(league=league, order=order, selection=selection, n_draws=n_draws, seed=seed)
+    # Mode selection
+    mode_options = ["Pre-computed library"]
+    if backend_ready:
+        mode_options.append("Live Julia solver")
 
-params = st.session_state["params"]
+    selected_mode = st.radio(
+        "Simulation mode",
+        mode_options,
+        index=0,
+        help="Pre-computed library provides verified draw results with true JuMP/SCIP computing times.",
+    )
 
-# ----------------------------------------------------------------------------- main canvas
+    if not backend_ready:
+        st.caption("Offline mode: using pre-computed draws library.")
+
+    if selected_mode == "Pre-computed library":
+        league_key = st.selectbox(
+            "League",
+            list(leagues),
+            format_func=lambda k: leagues[k]["label"],
+            key="pre_league",
+        )
+
+        sample_type = st.radio(
+            "Sample type",
+            ["Single draw", "10-draw sample (Strength Analysis)"],
+            index=0,
+            help="Single draw shows full fixtures and logs. 10-draw sample aggregates opponent strength distributions.",
+        )
+
+        if sample_type == "Single draw":
+            available_seeds = sorted(
+                [
+                    v["seed"]
+                    for k, v in precomputed_draws.items()
+                    if v.get("league") == league_key
+                ]
+            )
+            if not available_seeds:
+                available_seeds = [1]
+
+            col_seed, col_rnd = st.columns([2, 1])
+            with col_seed:
+                selected_seed = st.selectbox(
+                    "Seed",
+                    available_seeds,
+                    index=0,
+                    key="pre_seed_select",
+                    help="Select a seed from the pre-computed catalog.",
+                )
+            with col_rnd:
+                st.write("")
+                st.write("")
+                if st.button("Random", help="Select a random pre-computed seed"):
+                    selected_seed = random.choice(available_seeds)
+                    st.session_state["pre_seed_select"] = selected_seed
+
+            load_btn = st.button("Load draw", type="primary", width="stretch")
+            if load_btn or st.session_state["result"] is None:
+                key = f"{league_key}_{selected_seed}"
+                if key in precomputed_draws:
+                    st.session_state["result"] = precomputed_draws[key]
+                    st.session_state["source_label"] = (
+                        f"Pre-computed draw (seed {selected_seed}, true compute time: "
+                        f"{precomputed_draws[key]['seconds']:.2f} s)"
+                    )
+        else:
+            multi_key = f"{league_key}_10"
+            load_multi_btn = st.button("Load 10-draw sample", type="primary", width="stretch")
+            if load_multi_btn or st.session_state["result"] is None or len(st.session_state["result"].get("draws", [])) <= 1:
+                if multi_key in precomputed_multi:
+                    st.session_state["result"] = precomputed_multi[multi_key]
+                    st.session_state["source_label"] = (
+                        f"Pre-computed 10-draw sample (seed 2024, true compute time: "
+                        f"{precomputed_multi[multi_key]['seconds']:.2f} s)"
+                    )
+
+    else:
+        # Live Julia Solver Form
+        st.caption("Backend ready: Julia runtime running JuMP and SCIP.")
+        randomize = st.checkbox("New random seed on every run", value=True)
+        with st.form("live_draw_form"):
+            live_league = st.selectbox(
+                "League",
+                list(leagues),
+                format_func=lambda k: leagues[k]["label"],
+            )
+            live_order = st.radio(
+                "Draw order",
+                list(ORDER_LABELS),
+                format_func=ORDER_LABELS.get,
+                help="Pot-by-pot mirrors the official procedure; fully random shuffles teams and opponent pots.",
+            )
+            live_selection = st.radio(
+                "Selection algorithm",
+                list(SELECTION_LABELS),
+                format_func=SELECTION_LABELS.get,
+                help="Rejection sampling draws rapidly (~1.8s). Exhaustive solves every candidate (~20-40s).",
+            )
+            live_n = st.slider("Number of draws", 1, 25, 1)
+            live_seed_input = st.number_input(
+                "Seed",
+                1,
+                MAX_SEED,
+                random.randint(1, MAX_SEED),
+                disabled=randomize,
+            )
+            run_live = st.form_submit_button("Run live draw", type="primary", width="stretch")
+
+        if run_live:
+            actual_seed = random.randint(1, MAX_SEED) if randomize else int(live_seed_input)
+            try:
+                with st.spinner("Solving draw with JuMP and SCIP..."):
+                    res = fetch_live_draw(live_league, live_order, live_selection, live_n, actual_seed)
+                st.session_state["result"] = res
+                st.session_state["source_label"] = (
+                    f"Live solver result (seed {actual_seed}, compute time: {res['seconds']:.2f} s)"
+                )
+            except ApiError as exc:
+                st.error(str(exc))
+
+
+# ----------------------------------------------------------------------------- Main Canvas
+result = st.session_state.get("result")
+
 tab_result, tab_fair, tab_log, tab_pots = st.tabs(["Results", "Strength Analysis", "Draw Log", "Pots"])
 
 with tab_pots:
     for key, lg in leagues.items():
-        if params and key != params["league"]:
+        if result and key != result.get("league"):
             continue
         st.subheader(lg["label"])
         cols = st.columns(4)
@@ -239,24 +337,18 @@ with tab_pots:
                 st.caption(f"Pot {label}")
                 st.dataframe(
                     pd.DataFrame(pot)[["club", "nationality", "elo", "uefa"]].rename(
-                        columns={"club": "Club", "nationality": "Nation", "elo": "Elo", "uefa": "UEFA"}),
-                    hide_index=True, width="stretch")
+                        columns={"club": "Club", "nationality": "Nation", "elo": "Elo", "uefa": "UEFA"}
+                    ),
+                    hide_index=True,
+                    width="stretch",
+                )
 
-if params is None:
+if result is None:
     with tab_result:
-        st.info("Pick settings in the sidebar and click Run draw.")
+        st.info("Pick settings in the sidebar and click Load draw or Run live draw.")
     for tab in (tab_fair, tab_log):
         with tab:
-            st.caption("Run a draw first.")
-    st.stop()
-
-try:
-    with st.spinner("Running draw simulation..."):
-        result = get_draws(**params)
-except ApiError as exc:
-    for tab in (tab_result, tab_fair, tab_log):
-        with tab:
-            st.error(str(exc))
+            st.caption("No draw loaded yet.")
     st.stop()
 
 draws = result["draws"]
@@ -265,9 +357,12 @@ total_calls = sum(d["solver_calls"] for d in draws)
 violations = sum(len(d["violations"]) for d in draws)
 
 with tab_result:
+    if st.session_state.get("source_label"):
+        st.caption(st.session_state["source_label"])
+
     k1, k2, k3, k4, k5 = st.columns(5)
     k1.metric("Draws", n)
-    k2.metric("Total time", f"{result['seconds']:.1f} s")
+    k2.metric("True compute time", f"{result['seconds']:.2f} s")
     k3.metric("Solver calls / draw", f"{total_calls / n:.0f}")
     k4.metric("Rule check", "Passed" if violations == 0 else f"{violations} violations")
     k5.metric("Seed", result["seed"])
@@ -280,10 +375,18 @@ with tab_result:
     df = teams_frame(draw)
     st.dataframe(df, hide_index=True, width="stretch", height=420)
     c1, c2 = st.columns([1, 1])
-    c1.download_button("Download fixtures (CSV)", fixtures_frame(draw).to_csv(index=False),
-                       file_name=f"fixtures_{result['league']}_{draw['seed']}.csv", mime="text/csv")
-    c2.download_button("Download team table (CSV)", df.to_csv(index=False),
-                       file_name=f"teams_{result['league']}_{draw['seed']}.csv", mime="text/csv")
+    c1.download_button(
+        "Download fixtures (CSV)",
+        fixtures_frame(draw).to_csv(index=False),
+        file_name=f"fixtures_{result['league']}_{draw['seed']}.csv",
+        mime="text/csv",
+    )
+    c2.download_button(
+        "Download team table (CSV)",
+        df.to_csv(index=False),
+        file_name=f"teams_{result['league']}_{draw['seed']}.csv",
+        mime="text/csv",
+    )
 
     st.subheader("Club schedule")
     club = st.selectbox("Club", [t["club"] for t in draw["teams"]], key="club")
@@ -319,5 +422,9 @@ with tab_log:
         }
     )
     only_drawn = st.toggle("Hide steps forced by earlier draws", value=False)
-    st.dataframe(log[log["Origin"] == "drawn"] if only_drawn else log, hide_index=True,
-                 width="stretch", height=480)
+    st.dataframe(
+        log[log["Origin"] == "drawn"] if only_drawn else log,
+        hide_index=True,
+        width="stretch",
+        height=480,
+    )

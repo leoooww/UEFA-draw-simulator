@@ -4,14 +4,25 @@ Streamlit frontend for the Julia draw simulator in [`../draw-backend/draw_matchu
 
 Architecture:
 ```
-Streamlit (app.py, :8501) ---> Oxygen.jl HTTP service (julia/server.jl, :8080)
+Streamlit (app.py, :8501) ---> Pre-computed library (data/precomputed_draws.json)
+                         \---> Live Oxygen.jl service (julia/server.jl, :8080) [optional]
 ```
 
-The Julia process runs continuously. Streamlit communicates with it over HTTP, avoiding re-initialization on reruns.
+The application runs in two complementary modes:
+1. Pre-computed library (default, offline-ready): Instant browsing of 50 verified MILP draws across Champions League and Europa League, showing exact true JuMP/SCIP computing times recorded during simulation. Runs standalone with pure Python (ready for Streamlit Community Cloud).
+2. Live solver mode: When the local or containerized Julia service is running on port 8080, allows dynamic draws with arbitrary seeds and multi-draw parameters.
 
 ## Run
 
-### Docker
+### Streamlit only (instant offline mode)
+
+```bash
+cd draw-dashboard
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/streamlit run app.py
+```
+
+### Full stack (Docker)
 
 ```bash
 docker compose up --build
