@@ -26,25 +26,58 @@ const SOLVER = "SCIP"
 
 ---
 
-## Project Structure
+## Quick Start: Run the Web Dashboard Locally
 
-### 1. Interactive Streamlit Dashboard (`draw-dashboard/`)
-A container-ready web dashboard built with Python Streamlit that communicates over HTTP with a persistent Julia microservice (`Oxygen.jl` + `JuMP` / `SCIP`).
+The web dashboard is located in `draw-dashboard/` and can run either in lightweight standalone mode (using the precomputed simulation catalog) or with a live Julia solver.
 
-**Run with Docker:**
+### Option A: Standalone Streamlit App (Fastest, Python only)
+No Julia or Docker required. Runs instantly with the verified 50-draw MILP catalog and recorded true compute times:
+
+```bash
+# 1. Navigate to the dashboard directory from the project root
+cd draw-dashboard
+
+# 2. Activate the virtual environment (or create it if needed)
+source .venv/bin/activate
+# If the venv does not exist yet: python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+
+# 3. Launch the dashboard
+streamlit run app.py
+```
+Open [http://localhost:8501](http://localhost:8501) in your browser.
+
+---
+
+### Option B: Full Stack with Live Julia Solver (Optional)
+Requires Julia installed on your machine:
+
+```bash
+cd draw-dashboard
+julia --project=julia -e 'using Pkg; Pkg.instantiate()'
+./start.sh
+```
+
+---
+
+### Option C: Docker (Optional)
+Requires Docker Desktop installed and running:
+
 ```bash
 cd draw-dashboard
 docker compose up --build
 ```
 Access at `http://localhost:8501`.
 
-**Run locally:**
-```bash
-cd draw-dashboard
-julia --project=julia -e 'using Pkg; Pkg.instantiate()'
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-./start.sh
-```
+---
+
+## Project Structure
+
+### 1. Interactive Streamlit Dashboard (`draw-dashboard/`)
+The web simulator featuring animated draw tables, team crests, pot breakdown, and schedule Elo strength analysis. Contains:
+- `app.py`: Streamlit frontend application.
+- `data/`: League assignments and pre-computed draw catalogs.
+- `assets/logos/`: Official UEFA club crests.
+- `julia/`: Persistent `Oxygen.jl` microservice for live MILP solving.
 
 ### 2. Angular Frontend (`champions-league-draw/`)
 Web interface built with Angular.

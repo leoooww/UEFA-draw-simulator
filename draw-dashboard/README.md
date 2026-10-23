@@ -14,29 +14,40 @@ The application runs in two complementary modes:
 
 ## Run
 
-### Streamlit only (instant offline mode)
+### 1. Streamlit Dashboard (Instant offline mode, Python only)
+
+Runs with the pre-computed draw library without requiring Julia or Docker:
 
 ```bash
+# If you are in the project root:
 cd draw-dashboard
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-.venv/bin/streamlit run app.py
+
+# Activate virtual environment
+source .venv/bin/activate
+# If initializing for the first time: python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+
+# Run dashboard
+streamlit run app.py
+```
+Open `http://localhost:8501`.
+
+### 2. Full Stack with Live Julia Solver
+
+Requires Julia:
+
+```bash
+julia --project=julia -e 'using Pkg; Pkg.instantiate()'
+./start.sh
 ```
 
-### Full stack (Docker)
+### 3. Docker (Optional)
+
+Requires Docker Desktop installed and running:
 
 ```bash
 docker compose up --build
 ```
-
 Access at `http://localhost:8501`.
-
-### Local
-
-```bash
-julia --project=julia -e 'using Pkg; Pkg.instantiate()'
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-./start.sh
-```
 
 ## Parameters
 
