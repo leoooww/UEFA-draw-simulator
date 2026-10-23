@@ -141,8 +141,8 @@ def team_schedule(draw: dict, club: str) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def render_animated_results_table(df: pd.DataFrame, anim_key: int = 0) -> str:
-    """Render the results table with a top-left to bottom-right fading green wave animation for team names."""
+def render_animated_results_table(df: pd.DataFrame) -> str:
+    """Render the results table with a top-left to bottom-right fading green wave animation covering the whole cell."""
     cols = list(df.columns)
     team_cols = {
         "Club",
@@ -153,50 +153,51 @@ def render_animated_results_table(df: pd.DataFrame, anim_key: int = 0) -> str:
     }
 
     html = [
-        f"""<style>
-@keyframes fadeGreenSweep_{anim_key} {{
-  0% {{
+        """<style>
+@keyframes cellFadeGreenSweep {
+  0% {
     opacity: 0;
-    transform: scale(0.92) translateY(3px);
-    background-color: rgba(34, 197, 94, 0.65);
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.45);
+    transform: scale(0.96) translateY(2px);
+    background-color: rgba(34, 197, 94, 0.55);
+    box-shadow: inset 0 0 12px rgba(34, 197, 94, 0.45);
     color: #ffffff;
-  }}
-  35% {{
+  }
+  30% {
     opacity: 1;
-    transform: scale(1.02) translateY(0);
-    background-color: rgba(34, 197, 94, 0.4);
-    box-shadow: 0 0 6px rgba(34, 197, 94, 0.3);
+    transform: scale(1) translateY(0);
+    background-color: rgba(34, 197, 94, 0.35);
+    box-shadow: inset 0 0 8px rgba(34, 197, 94, 0.3);
     color: #15803d;
-  }}
-  100% {{
+  }
+  100% {
     opacity: 1;
     transform: scale(1) translateY(0);
     background-color: transparent;
     box-shadow: none;
     color: inherit;
-  }}
-}}
+  }
+}
 
-.table-wrap-{anim_key} {{
+.table-wrap {
   overflow-x: auto;
   overflow-y: auto;
-  max-height: 460px;
+  max-height: 480px;
   border: 1px solid rgba(128, 128, 128, 0.2);
   border-radius: 8px;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
-}}
+}
 
-.draw-table-{anim_key} {{
+.draw-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 0.85rem;
   font-family: inherit;
   text-align: left;
-}}
+}
 
-.draw-table-{anim_key} th {{
+.draw-table th {
   position: sticky;
   top: 0;
   z-index: 2;
@@ -206,50 +207,38 @@ def render_animated_results_table(df: pd.DataFrame, anim_key: int = 0) -> str:
   font-weight: 600;
   border-bottom: 2px solid rgba(128, 128, 128, 0.3);
   white-space: nowrap;
-}}
+}
 
-.draw-table-{anim_key} td {{
+.draw-table td {
   padding: 6px 10px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.12);
   white-space: nowrap;
-}}
-
-.draw-table-{anim_key} tr:hover {{
-  background-color: rgba(128, 128, 128, 0.06);
-}}
-
-.anim-team-{anim_key} {{
-  display: inline-block;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-weight: 500;
   will-change: transform, opacity, background-color;
-  animation-name: fadeGreenSweep_{anim_key};
+  animation-name: cellFadeGreenSweep;
   animation-duration: 0.85s;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-fill-mode: both;
-}}
+}
 
-.anim-cell-{anim_key} {{
-  display: inline-block;
-  will-change: transform, opacity;
-  animation-name: fadeGreenSweep_{anim_key};
-  animation-duration: 0.85s;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  animation-fill-mode: both;
-}}
+.draw-table tr:hover td {
+  background-color: rgba(128, 128, 128, 0.08);
+}
 
-.pot-pill {{
+.team-name {
+  font-weight: 600;
+}
+
+.pot-pill {
   display: inline-block;
   padding: 1px 6px;
   border-radius: 3px;
   font-size: 0.75rem;
   font-weight: 600;
   color: #111827;
-}}
+}
 </style>
-<div class="table-wrap-{anim_key}">
-<table class="draw-table-{anim_key}">
+<div class="table-wrap">
+<table class="draw-table">
   <thead>
     <tr>
 """
@@ -264,13 +253,13 @@ def render_animated_results_table(df: pd.DataFrame, anim_key: int = 0) -> str:
             val = row[col]
             delay = round(r * 0.035 + c * 0.025, 3)
             if col in team_cols:
-                content = f'<span class="anim-team-{anim_key}" style="animation-delay: {delay}s;">{val}</span>'
+                content = f'<span class="team-name">{val}</span>'
             elif col == "Pot":
                 pot_color = POT_COLORS.get(str(val), "#e2e8f0")
-                content = f'<span class="anim-cell-{anim_key}" style="animation-delay: {delay}s;"><span class="pot-pill" style="background-color: {pot_color};">Pot {val}</span></span>'
+                content = f'<span class="pot-pill" style="background-color: {pot_color};">Pot {val}</span>'
             else:
-                content = f'<span class="anim-cell-{anim_key}" style="animation-delay: {delay}s;">{val}</span>'
-            html.append(f"      <td>{content}</td>\n")
+                content = f"{val}"
+            html.append(f'      <td style="animation-delay: {delay}s;">{content}</td>\n')
         html.append("    </tr>\n")
 
     html.append("  </tbody>\n</table>\n</div>\n")
@@ -393,8 +382,8 @@ with st.sidebar:
                     selected_seed = random.choice(available_seeds)
                     st.session_state["pre_seed_select"] = selected_seed
 
-            load_btn = st.button("Load draw", type="primary", width="stretch")
-            if load_btn or st.session_state["result"] is None:
+            draw_btn = st.button("Draw", type="primary", width="stretch")
+            if draw_btn:
                 key = f"{league_key}_{selected_seed}"
                 if key in precomputed_draws:
                     st.session_state["result"] = precomputed_draws[key]
@@ -404,8 +393,8 @@ with st.sidebar:
                     )
         else:
             multi_key = f"{league_key}_10"
-            load_multi_btn = st.button("Load 10-draw sample", type="primary", width="stretch")
-            if load_multi_btn or st.session_state["result"] is None or len(st.session_state["result"].get("draws", [])) <= 1:
+            draw_multi_btn = st.button("Draw", type="primary", width="stretch")
+            if draw_multi_btn:
                 if multi_key in precomputed_multi:
                     st.session_state["result"] = precomputed_multi[multi_key]
                     st.session_state["source_label"] = (
@@ -443,7 +432,7 @@ with st.sidebar:
                 random.randint(1, MAX_SEED),
                 disabled=randomize,
             )
-            run_live = st.form_submit_button("Run live draw", type="primary", width="stretch")
+            run_live = st.form_submit_button("Draw", type="primary", width="stretch")
 
         if run_live:
             actual_seed = random.randint(1, MAX_SEED) if randomize else int(live_seed_input)
@@ -482,10 +471,10 @@ with tab_pots:
 
 if result is None:
     with tab_result:
-        st.info("Pick settings in the sidebar and click Load draw or Run live draw.")
+        st.info("Pick settings in the sidebar and click Draw to simulate.")
     for tab in (tab_fair, tab_log):
         with tab:
-            st.caption("No draw loaded yet.")
+            st.caption("No draw conducted yet. Click Draw in the sidebar.")
     st.stop()
 
 draws = result["draws"]
@@ -510,26 +499,7 @@ with tab_result:
         st.error("Rule violations: " + "; ".join(draw["violations"]))
 
     df = teams_frame(draw)
-
-    col_view, col_replay = st.columns([3, 1])
-    with col_view:
-        view_mode = st.radio(
-            "Table view",
-            ["Animated table", "Standard dataframe"],
-            horizontal=True,
-            label_visibility="collapsed",
-            key=f"view_mode_{idx}",
-        )
-    with col_replay:
-        if st.button("Replay animation", width="stretch", key=f"replay_{idx}"):
-            st.session_state["anim_nonce"] = st.session_state.get("anim_nonce", 0) + 1
-            st.rerun()
-
-    if view_mode == "Animated table":
-        anim_nonce = st.session_state.get("anim_nonce", 0) + idx * 10
-        st.markdown(render_animated_results_table(df, anim_nonce), unsafe_allow_html=True)
-    else:
-        st.dataframe(df, hide_index=True, width="stretch", height=420)
+    st.markdown(render_animated_results_table(df), unsafe_allow_html=True)
     c1, c2 = st.columns([1, 1])
     c1.download_button(
         "Download fixtures (CSV)",
