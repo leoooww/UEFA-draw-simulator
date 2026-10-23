@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 import random
+import shutil
+import time
 from typing import Any
 
 import pandas as pd
@@ -63,10 +66,52 @@ def get_draws(league: str, order: str, selection: str, n_draws: int, seed: int) 
 
 
 def backend_health() -> dict | None:
-    try:
-        return requests.get(f"{API_URL}/health", timeout=2).json()
-    except (requests.RequestException, ValueError):
-        return None
+    for timeout in (2, 4):
+        try:
+            resp = requests.get(f"{API_URL}/health", timeout=timeout)
+            if resp.ok:
+                return resp.json()
+        except (requests.RequestException, ValueError):
+            pass
+    return None
+
+
+@st.cache_resource
+def _launch_local_backend(julia_bin: str, server_file: str, project_dir: str):
+    import subprocess
+    return subprocess.Popen(
+        [julia_bin, f"--project={project_dir}", "-t", "auto", server_file],
+        cwd=project_dir,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+
+def ensure_backend_health() -> dict | None:
+    health = backend_health()
+    if health is not None:
+        return health
+
+    # If the backend is local and not yet running, auto-start it
+    if "127.0.0.1" in API_URL or "localhost" in API_URL:
+        julia_bin = shutil.which("julia")
+        if not julia_bin:
+            fallback = os.path.expanduser("~/.juliaup/bin/julia")
+            if os.path.exists(fallback):
+                julia_bin = fallback
+
+        here = Path(__file__).resolve().parent
+        server_path = here / "julia" / "server.jl"
+        project_dir = here / "julia"
+        if julia_bin and server_path.exists():
+            with st.spinner("Starting Julia backend service..."):
+                _launch_local_backend(julia_bin, str(server_path), str(project_dir))
+                for _ in range(45):
+                    time.sleep(1)
+                    h = backend_health()
+                    if h is not None and h.get("ready"):
+                        return h
+    return backend_health()
 
 
 # ----------------------------------------------------------------------------- data shaping
@@ -139,7 +184,7 @@ def strength_chart(agg: pd.DataFrame, metric: str, title: str, show_error: bool)
 
 
 # ----------------------------------------------------------------------------- backend gate
-health = backend_health()
+health = ensure_backend_health()
 if health is None:
     st.error(f"Julia service unreachable at `{API_URL}`.")
     st.caption("Start it with `julia --project=julia -t auto julia/server.jl` or `docker compose up`.")
