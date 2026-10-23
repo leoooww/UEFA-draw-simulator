@@ -105,11 +105,51 @@ st.set_page_config(page_title="2024-25 UEFA Draw Simulator", layout="wide")
 st.markdown(
     """<style>
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,GRAD,ROND@8..144,-10..0,25..150,100..1000,-400..400,0..100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-html, body, [class*="css"], [class*="st-"], .stApp,
-h1, h2, h3, h4, h5, h6, p, span, div, button, input, select, textarea,
-[data-testid^="st"] {
-  font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+/* Set Google Sans Flex as default font for the entire app, excluding icon elements */
+:root, html, body, .stApp {
+  font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Apply Google Sans Flex to general text elements */
+.stApp *:not([data-testid*="Icon"]):not([data-testid*="icon"]):not([class*="material-symbols"]):not([class*="material-icons"]):not([data-testid="stSidebarCollapseButton"] *):not([data-testid="collapsedControl"] *):not([data-testid="stToolbar"] *):not(code):not(pre):not(kbd) {
+  font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, label,
+.stMarkdown, .stText, .stCaption,
+.stButton button, .stDownloadButton button,
+.stSelectbox, .stRadio, .stMetric,
+[data-testid="stMetricValue"], [data-testid="stMetricLabel"],
+[data-testid="stTable"] {
+  font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Explicitly preserve and enforce Streamlit Material Symbol icons */
+[data-testid="stIconMaterial"],
+[data-testid*="Icon"],
+[data-testid*="icon"],
+.material-symbols-rounded,
+.material-symbols-outlined,
+.material-icons,
+[data-testid="stSidebarCollapseButton"] *,
+[data-testid="collapsedControl"] *,
+[data-testid="stToolbar"] *,
+[data-testid="stToolbarActions"] *,
+[data-testid="stHeader"] button *,
+button[kind="header"] *,
+span[translate="no"] {
+  font-family: 'Material Symbols Rounded', 'Material Symbols Outlined', 'Material Icons' !important;
+  font-feature-settings: 'liga' 1 !important;
+  -webkit-font-feature-settings: 'liga' 1 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  word-wrap: normal !important;
+  white-space: nowrap !important;
+  direction: ltr !important;
+  -webkit-font-smoothing: antialiased !important;
 }
 
 code, pre, pre *, code *, kbd {
